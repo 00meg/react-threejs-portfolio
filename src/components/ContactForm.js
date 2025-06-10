@@ -16,7 +16,7 @@ function ContactForm({ onBack }) {
 
   if (state.succeeded) {
     return (
-      <motion.div 
+      <motion.div
         className="contact-container"
         variants={formAnimation}
         initial="initial"
@@ -24,6 +24,7 @@ function ContactForm({ onBack }) {
         exit="exit"
         transition={formAnimation.transition}
       >
+        {/* Usiamo la classe 'close-button' per coerenza */}
         <button onClick={onBack} className="close-button">&times;</button>
         <h2>Thank you!</h2>
         <p>Your message has been sent successfully.</p>
@@ -32,7 +33,7 @@ function ContactForm({ onBack }) {
   }
 
   return (
-    <motion.div 
+    <motion.div
       className="contact-container"
       variants={formAnimation}
       initial="initial"
@@ -40,6 +41,7 @@ function ContactForm({ onBack }) {
       exit="exit"
       transition={formAnimation.transition}
     >
+      {/* Usiamo la classe 'close-button' per coerenza */}
       <button onClick={onBack} className="close-button">&times;</button>
       <h2>get in touch</h2>
       <form className="contact-form" onSubmit={handleSubmit}>

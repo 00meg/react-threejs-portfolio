@@ -30,7 +30,7 @@ function InfoText({ title, description, videoDims, visible }) {
       interval = setInterval(() => {
         // Increment the index first.
         index++;
-        
+
         // Always calculate the substring from the original fullText.
         // This is robust and prevents scrambling if React skips a frame.
         setDisplayedText(fullText.substring(0, index));
@@ -61,10 +61,10 @@ function InfoText({ title, description, videoDims, visible }) {
 
   useEffect(() => {
     const ctx = canvas.getContext('2d');
-    
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-    
+
     const lines = displayedText.split('\n');
     const titleLine = lines[0] || '';
     const descriptionLines = lines.slice(1).join(' ');
@@ -73,7 +73,7 @@ function InfoText({ title, description, videoDims, visible }) {
     ctx.fillText(titleLine, 10, 25);
 
     ctx.font = '400 14px "Source Code Pro", monospace';
-    
+
     const words = descriptionLines.split(' ');
     let line = '';
     let y = 50;
@@ -115,12 +115,12 @@ function InfoText({ title, description, videoDims, visible }) {
   return (
     <mesh position={position}>
       <planeGeometry args={[textPlaneWidth, 1]} />
-      <meshBasicMaterial 
+      <meshBasicMaterial
         ref={materialRef}
-        map={texture} 
-        transparent 
-        opacity={0} 
-        toneMapped={false} 
+        map={texture}
+        transparent
+        opacity={0}
+        toneMapped={false}
       />
     </mesh>
   );
