@@ -3,7 +3,7 @@
 import React, { useMemo } from 'react';
 import * as THREE from 'three';
 
-export default function ConnectionLines({ positions, threshold = 16 }) {
+export default function ConnectionLines({ positions, threshold = 36 }) {
   const geometry = useMemo(() => {
     const points = [];
     if (!positions || positions.length < 2) return null;

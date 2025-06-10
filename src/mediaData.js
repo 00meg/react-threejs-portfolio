@@ -38,7 +38,7 @@ export const mediaData = [
       url: '/videocitta.mp4',
       title: 'Video Città',
       description: 'The city as a canvas; a moving portrait of urban life and digital intervention.',
-      width: 16, // Added for a 16:9 aspect ratio
+      width: 9, // Added for a 16:9 aspect ratio
       height: 9,  // Added for a 16:9 aspect ratio
     },
     {
