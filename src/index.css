@@ -9,7 +9,7 @@ body {
   text-transform: lowercase;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #000000;
+  background-color: #0d0d0d;
   color: #C0C0C0;
   overflow: hidden; 
 }
