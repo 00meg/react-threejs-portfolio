@@ -5,7 +5,8 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import InfoText from './InfoText';
 
-const VideoItem = forwardRef(({ url, title, description, target, isFocused, isSceneFocused, onClick }, ref) => {
+// Wrap the component definition in React.memo
+const VideoItem = React.memo(forwardRef(({ url, title, description, target, isFocused, isSceneFocused, onClick }, ref) => {
   const [dims, setDims] = useState([4, 2.25]);
   const materialRef = useRef();
 
@@ -38,7 +39,6 @@ const VideoItem = forwardRef(({ url, title, description, target, isFocused, isSc
     const targetOpacity = isFocused ? 1.0 : 0.87;
     materialRef.current.opacity = THREE.MathUtils.lerp(materialRef.current.opacity, targetOpacity, 0.1);
 
-    // Increased speed for a snappier feel and smoother slider dragging
     const lerpFactor = 0.15; 
     const finalTargetPosition = new THREE.Vector3().copy(target.position);
 
@@ -71,6 +71,6 @@ const VideoItem = forwardRef(({ url, title, description, target, isFocused, isSc
       <InfoText title={title} description={description} videoDims={dims} visible={isFocused} />
     </group>
   );
-});
+})); // <-- Close the React.memo and forwardRef wrappers
 
 export default VideoItem;

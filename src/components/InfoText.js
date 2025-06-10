@@ -1,3 +1,5 @@
+// src/components/InfoText.js
+
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
@@ -7,7 +9,6 @@ function InfoText({ title, description, videoDims, visible }) {
   const [displayedText, setDisplayedText] = useState('');
   const materialRef = useRef();
 
-  // Step 1: Create the canvas and texture only ONCE using useMemo with an empty dependency array.
   const { canvas, texture } = useMemo(() => {
     const canvas = document.createElement('canvas');
     canvas.width = 512;
@@ -16,33 +17,51 @@ function InfoText({ title, description, videoDims, visible }) {
     return { canvas, texture };
   }, []);
 
-  // Step 2: The typewriter effect logic remains the same. It just updates the text state.
   const fullText = useMemo(() => `${title}\n${description}`, [title, description]);
 
+  // --- THIS IS THE CORRECTED EFFECT ---
   useEffect(() => {
     let interval;
     if (visible) {
+      // Start with an empty string and a starting index of 0.
       let index = 0;
-      setDisplayedText(''); // Reset on visible
+      setDisplayedText('');
+
       interval = setInterval(() => {
-        if (index < fullText.length) {
-          setDisplayedText(prev => prev + fullText[index]);
-          index++;
-        } else {
+        // Increment the index first.
+        index++;
+        
+        // Always calculate the substring from the original fullText.
+        // This is robust and prevents scrambling if React skips a frame.
+        setDisplayedText(fullText.substring(0, index));
+
+        // If the index has reached the end of the text, stop the interval.
+        if (index >= fullText.length) {
           clearInterval(interval);
         }
-      }, 20);
-    } else {
-      setDisplayedText(''); // Clear when not visible
-    }
-    return () => clearInterval(interval);
-  }, [visible, fullText]);
+      }, 20); // The interval time remains the same.
 
-  // Step 3: Use a new useEffect to RE-DRAW on the EXISTING canvas whenever the text changes.
+    } else {
+      // If not visible, clear the text immediately.
+      setDisplayedText('');
+    }
+
+    // The cleanup function is crucial to prevent memory leaks.
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [visible, fullText]); // Dependencies are correct.
+
+
+  // The rest of your component code remains exactly the same.
+  // The drawing effect, the opacity animation, and the return statement
+  // are all correct and do not need to be changed.
+
   useEffect(() => {
     const ctx = canvas.getContext('2d');
     
-    // Drawing logic from the old useMemo block is moved here
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
     
@@ -50,11 +69,9 @@ function InfoText({ title, description, videoDims, visible }) {
     const titleLine = lines[0] || '';
     const descriptionLines = lines.slice(1).join(' ');
 
-    // --- Draw Title (Bold) ---
     ctx.font = '700 16px "Source Code Pro", monospace';
     ctx.fillText(titleLine, 10, 25);
 
-    // --- Draw Description (Regular) ---
     ctx.font = '400 14px "Source Code Pro", monospace';
     
     const words = descriptionLines.split(' ');
@@ -77,12 +94,10 @@ function InfoText({ title, description, videoDims, visible }) {
     }
     ctx.fillText(line, 10, y);
 
-    // Tell Three.js that the texture needs to be updated
     texture.needsUpdate = true;
 
-  }, [displayedText, canvas, texture]); // This effect runs only when the text changes
+  }, [displayedText, canvas, texture]);
 
-  // Animate the opacity
   useFrame(() => {
     if (materialRef.current) {
         const targetOpacity = visible ? 1 : 0;
@@ -100,7 +115,6 @@ function InfoText({ title, description, videoDims, visible }) {
   return (
     <mesh position={position}>
       <planeGeometry args={[textPlaneWidth, 1]} />
-      {/* The material now uses the single texture created in the useMemo hook */}
       <meshBasicMaterial 
         ref={materialRef}
         map={texture} 
