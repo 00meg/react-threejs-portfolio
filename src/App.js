@@ -1,6 +1,4 @@
-// src/App.js
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Import useEffect
 import { Canvas } from '@react-three/fiber';
 import { AnimatePresence } from 'framer-motion';
 import VideoScene from './components/VideoScene';
@@ -12,33 +10,44 @@ function App() {
   const [showContact, setShowContact] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [layoutSeed, setLayoutSeed] = useState(0);
+  const [cameraZ, setCameraZ] = useState(15); // State for camera Z position
+
+  // Adjust camera Z based on screen width
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) { // Adjust breakpoint as needed
+        setCameraZ(20); // Pull camera back for mobile
+      } else {
+        setCameraZ(15);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Call once on mount
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const blurClass = showContact || showAbout ? 'blurred' : '';
 
-  // Close both modals
   const handleCloseModals = () => {
     setShowContact(false);
     setShowAbout(false);
   };
 
-  // Show About, but close Contact first
   const handleShowAbout = () => {
     setShowContact(false);
     setShowAbout(true);
   };
 
-  // Show Contact, but close About first
   const handleShowContact = () => {
     setShowAbout(false);
     setShowContact(true);
   };
 
   const triggerRearrangeOrClose = () => {
-    // If a modal is open, an outside click should close it
     if (showContact || showAbout) {
       handleCloseModals();
     } else {
-      // Otherwise, rearrange the background
       setLayoutSeed(s => s + 0.5);
     }
   };
@@ -46,7 +55,7 @@ function App() {
   return (
     <div className="main-container">
       <div id="canvas-container" className={blurClass} onClick={triggerRearrangeOrClose}>
-        <Canvas camera={{ position: [0, 0, 15] }}>
+        <Canvas camera={{ position: [0, 0, cameraZ] }}> {/* Use dynamic cameraZ */}
           <VideoScene 
             layoutSeed={layoutSeed} 
           />
