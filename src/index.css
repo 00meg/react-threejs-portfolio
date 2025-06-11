@@ -1,384 +1,442 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;300;700&display=swap');
+/* src/components/AboutPage.css */
 
-body {
-  margin: 0;
-  font-family: 'Source Code Pro', monospace;
-  font-weight: 300;
-  text-transform: lowercase;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #101010;
-  color: #C0C0C0;
-  overflow: hidden;
-}
+/* (Keep this file as it is. It already defines the left-aligned float behavior for desktop,
+    which is what we want to retain on mobile by removing conflicting rules from index.css) */
 
-.main-container {
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-}
-
-.blurred {
-  filter: blur(8px);
-  opacity: 0.5;
-  pointer-events: none; /* Prevent clicks on blurred background elements */
-}
-
-#canvas-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  transition: filter 0.4s ease-in-out, opacity 0.4s ease-in-out;
-}
-
-.ui-foreground-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.bottom-text {
-  position: absolute;
-  bottom: 10px;
-  left: 20px;
-  font-size: 0.7rem;
-  color: #c0c0c0a0;
-  line-height: 1.3;
-  width: 70%;
-  z-index: -10;
-}
-
-.nav-container {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 25px;
-}
-
-.nav-link {
-  pointer-events: auto;
-  font-family: 'Source Code Pro', monospace;
-  font-weight: 300;
-  font-size: 0.9rem;
-  color: #C0C0C0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: opacity 0.3s;
-}
-
-.nav-link:hover {
-  opacity: 0.7;
-}
-
-.contact-container, .about-container { /* Unified styling for modals */
-  z-index: 10;
-  width: 90%; /* Make width responsive */
-  max-width: 400px; /* Still a max-width for larger screens */
-  padding: 2rem;
-  background-color: rgba(20, 20, 20, 0.7);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-radius: 6px;
-  border: 1px solid #2a2a2a;
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box; /* Include padding in width calculation */
-  max-height: 90vh; /* Allow container to be tall */
-  overflow-y: auto; /* Add scroll if content overflows */
-  pointer-events: auto; /* Allow clicks on the modal itself */
-}
-
-
-/* New unified style for the close button on all modals */
-.close-button {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 1.2rem;
-  font-weight: 300;
-  line-height: 1;
-  background: none;
-  border: none;
-  color: #C0C0C0;
-  opacity: 0.7;
-  cursor: pointer;
-  padding: 5px;
-  transition: opacity 0.3s ease;
-  z-index: 15;
-}
-
-.close-button:hover {
-  opacity: 1;
-}
-
-
-.contact-container h2, .about-container h2 { /* Unified h2 styling */
-  font-weight: 700;
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-.contact-form {
-  width: 100%;
-  text-align: left;
-  margin-top: 2rem;
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 0.8rem;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  box-sizing: border-box;
-  background-color: rgba(31, 31, 31, 0.5);
-  border: 1px solid #2a2a2a;
-  color: #C0C0C0;
-  padding: 0.8rem;
-  font-family: 'Source Code Pro', monospace;
-  font-weight: 300;
-  font-size: 0.9rem;
-  border-radius: 4px;
-  transition: border-color 0.3s;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: #888;
-}
-
-.contact-form button[type="submit"] {
-  width: 100%;
-  padding: 0.8rem 1.5rem;
-  margin-top: 0.5rem;
-  background-color: #C0C0C0;
-  color: #141414;
-  border: none;
-  cursor: pointer;
-  font-family: 'Source Code Pro', monospace;
-  font-weight: 700;
-  font-size: 0.9rem;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-  text-transform: lowercase;
-}
-
-.contact-form button:hover:not(:disabled) {
-  background-color: #ffffff;
-}
-
-.contact-form button:disabled {
-  opacity: 0.5;
-  cursor: wait;
-}
-
-.vertical-slider {
-  pointer-events: auto;
-  position: absolute;
-  top: 50%;
-  right: -50px;
-  width: 200px;
-  height: 2px;
-  -webkit-appearance: none;
-  appearance: none;
-  background: rgba(255, 255, 255, 0.1);
-  outline: none;
-  transform-origin: center;
-  transform: translateY(-100px) rotate(-90deg);
-  cursor: pointer;
-  visibility: hidden; /* Keep hidden as it's not meant for user interaction */
-}
-
-.vertical-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  background: #c0c0c0;
-  border-radius: 50%;
-  border: 1px solid #333;
-}
-
-.vertical-slider::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  background: #c0c0c0;
-  border-radius: 50%;
-  border: 1px solid #333;
-}
-
-/* Specific About Page Adjustments */
-.about-container {
-  max-width: 720px; /* Wider for about content */
-  text-align: left; /* Align text left for readability */
-}
-
-.about-content {
-  margin-top: 30px;
-  overflow: auto;
-}
-
-.profile-picture {
-  float: left;
-  margin-right: 1.5rem;
-  margin-bottom: 1rem;
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
-  border: 2px solid #3a3a3a;
-  border-radius: 6px;
-}
-
-.about-container p {
-  font-size: 0.9rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-/* Video Info Overlay Styles */
-.video-info-overlay {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5; /* Sopra il canvas ma sotto i moduli */
-  background-color: rgba(20, 20, 20, 0.7);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-radius: 6px;
-  border: 1px solid #2a2a2a;
-  padding: 1.5rem;
-  max-width: 500px; /* Larghezza massima */
-  width: 90%; /* Responsive width */
-  text-align: center;
-  box-sizing: border-box;
-  color: #C0C0C0;
-  pointer-events: auto; /* Allow clicks on the overlay itself */
-}
-
-.video-info-overlay h3 {
-  font-weight: 700;
-  margin-top: 0;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.video-info-overlay p {
-  font-size: 0.8rem;
-  line-height: 1.4;
-  margin-bottom: 0;
-}
-
-
-/* --- Mobile Responsiveness --- */
-@media (max-width: 768px) { /* Tablet and Mobile Devices */
-  .nav-container {
-    flex-direction: column; /* Stack navigation links */
-    top: 10px;
-    right: 10px;
-    gap: 10px;
+    .about-container {
+      z-index: 10;
+      width: 100%;
+      max-width: 600px; /* This max-width will be overridden by index.css specific rules later */
+      padding: 2.5rem;
+      background-color: rgba(20, 20, 20, 0.7);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 6px;
+      border: 1px solid #2a2a2a;
+      text-align: left; /* Keep left alignment */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #c0c0c0;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+  
+    .about-content {
+      margin-top: 1rem;
+    }
+  
+    .profile-picture {
+      width: 120px;
+      height: 120px;
+      border-radius: 6px;
+      object-fit: cover;
+      float: left; /* This is the key: keep it floating left */
+      margin-right: 1.5rem;
+      margin-bottom: 1rem;
+      border: 2px solid #3a3a3a;
+    }
+  
+    .about-container h2 {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      /* No text-align: center here in AboutPage.css */
+    }
+  
+    .about-container p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+  
+  
+  /* src/index.css */
+  
+  @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;300;700&display=swap');
+  
+  body {
+    margin: 0;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 300;
+    text-transform: lowercase;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #0d0d0d;
+    color: #C0C0C0;
+    overflow: hidden;
   }
-
-  .nav-link {
-    font-size: 0.8rem; /* Smaller font for navigation */
+  
+  .main-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
   }
-
+  
+  .blurred {
+    filter: blur(8px);
+    opacity: 0.5;
+    pointer-events: none; /* Prevent clicks on blurred background elements */
+  }
+  
+  #canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: filter 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  }
+  
+  .ui-foreground-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
   .bottom-text {
-    font-size: 0.65rem;
-    left: 10px;
-    bottom: 5px;
-    width: 90%; /* Take more width on small screens */
-  }
-
-  .contact-container, .about-container {
-    width: 95%; /* Wider modals on smaller screens */
-    padding: 1.5rem; /* Reduce padding */
-  }
-
-  .profile-picture {
-    float: none; /* Disable float on small screens */
-    margin-right: 0;
-    margin-bottom: 1rem;
-    width: 120px; /* Smaller profile picture */
-    height: 120px;
-    display: block; /* Center the image */
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .about-container h2 {
-    text-align: center; /* Center heading when image is not floated */
-  }
-
-  .video-info-overlay {
+    position: absolute;
     bottom: 10px;
-    padding: 1rem;
-    max-width: 95%; /* Più largo su mobile */
+    left: 20px;
+    font-size: 0.7rem;
+    color: #c0c0c0a0;
+    line-height: 1.3;
+    width: 50%; /* Adjusted from 70% */
+    z-index: -10;
   }
-  .video-info-overlay h3 {
-    font-size: 0.9rem;
-  }
-  .video-info-overlay p {
-    font-size: 0.75rem;
-  }
-}
-
-@media (max-width: 480px) { /* Smaller Mobile Devices */
+  
   .nav-container {
-    gap: 8px;
-    right: 5px;
-    top: 5px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: row; /* Default to row for desktop */
+    align-items: center;
+    gap: 25px;
   }
-
+  
   .nav-link {
-    font-size: 0.75rem;
+    pointer-events: auto;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: #C0C0C0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s;
   }
-
-  .bottom-text {
-    font-size: 0.6rem;
-    left: 5px;
-    bottom: 2px;
+  
+  .nav-link:hover {
+    opacity: 0.7;
   }
-
-  .contact-container, .about-container {
-    padding: 1rem; /* Even less padding */
+  
+  .contact-container, .about-container { /* Unified styling for modals */
+    z-index: 10;
+    width: 90%; /* Make width responsive */
+    max-width: 400px; /* Still a max-width for larger screens (will be overridden for about-container) */
+    padding: 2rem;
+    background-color: rgba(20, 20, 20, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 6px;
+    border: 1px solid #2a2a2a;
+    text-align: center; /* This centers content in modals by default */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box; /* Include padding in width calculation */
+    max-height: 90vh; /* Allow container to be tall */
+    overflow-y: auto; /* Add scroll if content overflows */
+    pointer-events: auto; /* Allow clicks on the modal itself */
   }
-
-  .contact-form button[type="submit"] {
-    padding: 0.6rem 1rem; /* Smaller button padding */
+  
+  
+  /* New unified style for the close button on all modals */
+  .close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1;
+    background: none;
+    border: none;
+    color: #C0C0C0;
+    opacity: 0.7;
+    cursor: pointer;
+    padding: 5px;
+    transition: opacity 0.3s ease;
+    z-index: 15;
+  }
+  
+  .close-button:hover {
+    opacity: 1;
+  }
+  
+  
+  .contact-container h2, .about-container h2 { /* Unified h2 styling */
+    font-weight: 700;
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  
+  .contact-form {
+    width: 100%;
+    text-align: left;
+    margin-top: 2rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
     font-size: 0.8rem;
   }
-
-  .video-info-overlay {
-    bottom: 5px;
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgba(31, 31, 31, 0.5);
+    border: 1px solid #2a2a2a;
+    color: #C0C0C0;
     padding: 0.8rem;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 300;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    transition: border-color 0.3s;
   }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #888;
+  }
+  
+  .contact-form button[type="submit"] {
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    margin-top: 0.5rem;
+    background-color: #C0C0C0;
+    color: #141414;
+    border: none;
+    cursor: pointer;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    text-transform: lowercase;
+  }
+  
+  .contact-form button:hover:not(:disabled) {
+    background-color: #ffffff;
+  }
+  
+  .contact-form button:disabled {
+    opacity: 0.5;
+    cursor: wait;
+  }
+  
+  .vertical-slider {
+    pointer-events: auto;
+    position: absolute;
+    top: 50%;
+    right: -50px;
+    width: 200px;
+    height: 2px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    transform-origin: center;
+    transform: translateY(-100px) rotate(-90deg);
+    cursor: pointer;
+    visibility: hidden; /* Keep hidden as it's not meant for user interaction */
+  }
+  
+  .vertical-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #c0c0c0;
+    border-radius: 50%;
+    border: 1px solid #333;
+  }
+  
+  .vertical-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #c0c0c0;
+    border-radius: 50%;
+    border: 1px solid #333;
+  }
+  
+  /* Specific About Page Adjustments (in index.css for general overrides) */
+  .about-container {
+    max-width: 720px; /* Wider for about content on desktop */
+    text-align: left; /* Ensure left alignment for about content */
+  }
+  
+  .about-content {
+    margin-top: 30px;
+    overflow: auto;
+  }
+  
+  /* The profile-picture specific styles for desktop are already set in AboutPage.css
+     and include `float: left;`. We want to preserve that.
+     So, we avoid overriding it to `float: none` in mobile media queries here.
+  */
+  .about-container p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  /* Video Info Overlay Styles */
+  .video-info-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5; /* Sopra il canvas ma sotto i moduli */
+    background-color: rgba(20, 20, 20, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 6px;
+    border: 1px solid #2a2a2a;
+    padding: 1.5rem;
+    max-width: 500px; /* Larghezza massima */
+    width: 90%; /* Responsive width */
+    text-align: center;
+    box-sizing: border-box;
+    color: #C0C0C0;
+    pointer-events: auto; /* Allow clicks on the overlay itself */
+  }
+  
   .video-info-overlay h3 {
-    font-size: 0.85rem;
+    font-weight: 700;
+    margin-top: 0;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
   }
+  
   .video-info-overlay p {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin-bottom: 0;
   }
-}
+  
+  
+  /* --- Mobile Responsiveness --- */
+  @media (max-width: 768px) { /* Tablet and Mobile Devices */
+    .nav-container {
+      flex-direction: row; /* KEEP as row for mobile as requested */
+      top: 10px;
+      right: 10px;
+      gap: 10px; /* Adjusted gap for smaller screens */
+    }
+  
+    .nav-link {
+      font-size: 0.8rem; /* Smaller font for navigation */
+    }
+  
+    .bottom-text {
+      font-size: 0.65rem;
+      left: 10px;
+      bottom: 5px;
+      width: 60%;
+    }
+  
+    .contact-container, .about-container {
+      width: 95%; /* Wider modals on smaller screens */
+      padding: 1.5rem; /* Reduce padding */
+    }
+  
+    /* ABOUT PAGE SPECIFIC OVERRIDES FOR MOBILE IN INDEX.CSS */
+    /* Remove or comment out any rules that cause centering or float changes for .profile-picture and .about-container h2 */
+    /*
+    .profile-picture {
+      float: none; // REMOVE THIS - it causes the image to unfloat
+      margin-right: 0; // REMOVE THIS IF YOU WANT MARGIN
+      margin-bottom: 1rem;
+      width: 120px;
+      height: 120px;
+      display: block; // REMOVE THIS - it causes the image to take full width and then be centered
+      margin-left: auto; // REMOVE THIS
+      margin-right: auto; // REMOVE THIS
+    }
+  
+    .about-container h2 {
+      text-align: center; // REMOVE THIS - it causes the heading to center
+    }
+    */
+    /* The above rules are now commented out/removed.
+       The .profile-picture and .about-container h2 styles from AboutPage.css (float: left; text-align: left;)
+       will now correctly apply on mobile. */
+  
+  
+    .video-info-overlay {
+      bottom: 10px;
+      padding: 1rem;
+      max-width: 95%; /* Più largo su mobile */
+    }
+    .video-info-overlay h3 {
+      font-size: 0.9rem;
+    }
+    .video-info-overlay p {
+      font-size: 0.75rem;
+    }
+  }
+  
+  @media (max-width: 480px) { /* Smaller Mobile Devices */
+    .nav-container {
+      gap: 8px;
+      right: 5px;
+      top: 5px;
+    }
+  
+    .nav-link {
+      font-size: 0.75rem;
+    }
+  
+    .bottom-text {
+      font-size: 0.6rem;
+      left: 5px;
+      bottom: 2px;
+      width: 70%;
+    }
+  
+    .contact-container, .about-container {
+      padding: 1rem; /* Even less padding */
+    }
+  
+    .contact-form button[type="submit"] {
+      padding: 0.6rem 1rem; /* Smaller button padding */
+      font-size: 0.8rem;
+    }
+  
+    .video-info-overlay {
+      bottom: 5px;
+      padding: 0.8rem;
+    }
+    .video-info-overlay h3 {
+      font-size: 0.85rem;
+    }
+    .video-info-overlay p {
+      font-size: 0.7rem;
+    }
+  }

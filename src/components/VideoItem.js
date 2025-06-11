@@ -1,14 +1,13 @@
 import React, { useRef, useState, useMemo, forwardRef, useEffect } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber'; // Import useThree
 import { useVideoTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import InfoText from './InfoText';
 
-// Parallax constants for individual video item movement - Adjusted for stronger effect
-const PARALLAX_STRENGTH_X = 0.1; // Increased from 0.05
-const PARALLAX_STRENGTH_Y = 0.06; // Increased from 0.03
-const PARALLAX_Z_RANGE = 600;    // Expected max range of Z in scattered view (e.g., if SCATTER_RADIUS is 300, Z can be from -300 to 300, so range is 600)
-// PARALLAX_LERP_FACTOR was for internal smoothing of parallax offset, now directly integrated into target position lerp
+// Parallax constants for individual video item movement
+// These are BASE strengths; the prop 'parallaxStrength' will modify them
+const BASE_PARALLAX_STRENGTH_X = 0.05; // Base X movement
+const BASE_PARALLAX_STRENGTH_Y = 0.03; // Base Y movement
 
 // Animation speed constants
 const FOCUS_SPEED_POSITION_LERP_FACTOR = 0.25; // Quicker move to center
@@ -22,9 +21,22 @@ const DEFAULT_SPEED_ROTATION_LERP_FACTOR = 0.1; // Normal speed for unfocusing/r
 const DEFAULT_SPEED_OPACITY_LERP_FACTOR = 0.1;  // Normal speed for other videos dimming/all becoming opaque
 
 
-const VideoItem = forwardRef(({ url, title, description, target, isFocused, isSceneFocused, onClick, videoDims, mousePosition, scrollInfluence }, ref) => {
+const VideoItem = forwardRef(({
+  url,
+  title,
+  description,
+  target, // Contains { position, scale } for current target state
+  isFocused,
+  isSceneFocused,
+  onClick,
+  videoDims,
+  mousePosition,
+  scrollInfluence,
+  parallaxStrength // NEW: This prop comes from VideoScene
+}, ref) => {
   const meshRef = useRef();
   const materialRef = useRef();
+  const { camera } = useThree(); // Use useThree to access camera for potential calculations
 
   // useVideoTexture for robust video loading and playback
   const texture = useVideoTexture(url, {
@@ -54,6 +66,7 @@ const VideoItem = forwardRef(({ url, title, description, target, isFocused, isSc
     return new THREE.Vector3(aspectRatio, 1, 1);
   }, [videoDims]);
 
+
   useFrame(() => {
     if (meshRef.current && target) {
       // Determine which lerp factor to use for position, scale, and rotation
@@ -61,25 +74,41 @@ const VideoItem = forwardRef(({ url, title, description, target, isFocused, isSc
       const currentScaleLerp = isFocused ? FOCUS_SPEED_SCALE_LERP_FACTOR : DEFAULT_SPEED_SCALE_LERP_FACTOR;
       const currentRotationLerp = isFocused ? FOCUS_SPEED_ROTATION_LERP_FACTOR : DEFAULT_SPEED_ROTATION_LERP_FACTOR;
 
-      // Start with the base target position
+      // Start with the base target position from props
       const baseTargetPosition = target.position.clone();
       let finalTargetPosition = baseTargetPosition;
 
       // Apply individual parallax effect if not focused and scene is not focused
-      if (!isFocused && !isSceneFocused) {
-        const currentZ = meshRef.current.position.z;
-        const normalizedZ = (currentZ + PARALLAX_Z_RANGE / 2) / PARALLAX_Z_RANGE;
+      // and only if mouse/scroll input is available
+      if (!isFocused && !isSceneFocused && mousePosition && scrollInfluence) {
+        // Calculate parallax factor based on its *current* distance to camera
+        // Objects further away will move less (smaller parallax effect)
+        // Ensure this calculation is stable and doesn't cause jitters.
+        // A simple depth-based factor (0 to 1) for parallax intensity.
+        // You'll need to know the max Z range of your scattered videos.
+        // A rough estimate: cameraZ - (min video Z) for closer, cameraZ - (max video Z) for further.
+        // Or simply use the target Z for parallax calculation if stable enough.
 
-        // Corrected Parallax Factor: Closer objects (more positive Z) should move MORE.
-        // normalizedZ goes from 0 (furthest) to 1 (closest).
-        const parallaxFactor = normalizedZ; // Use normalizedZ directly for standard parallax
+        // More stable parallax factor based on the target Z relative to the camera
+        // assuming target.position.z is within a reasonable range (e.g. -300 to 300 for scatter)
+        // We'll normalize the Z-position relative to a fixed depth range.
+        const maxSceneDepth = 300; // Assuming SCATTER_RADIUS_DESKTOP is 300, Z ranges roughly -300 to 300
+        const minSceneDepth = -300;
+        const depthRange = maxSceneDepth - minSceneDepth;
 
-        // NEW: Combine mouse position and scroll influence for parallax input
-        const effectiveParallaxInputX = mousePosition.x + scrollInfluence.x;
-        const effectiveParallaxInputY = mousePosition.y + scrollInfluence.y;
+        // Calculate a normalized Z for parallax (0 for furthest, 1 for closest within the range)
+        // Adjust 0.5 to control sensitivity of parallax based on depth.
+        const normalizedZ = (target.position.z - minSceneDepth) / depthRange;
+        // Make objects further away move less with a slight exponential decay
+        const parallaxDepthFactor = Math.pow(Math.max(0, normalizedZ), 0.7); // 0.7 gives a good curve
 
-        const parallaxOffsetX = effectiveParallaxInputX * PARALLAX_STRENGTH_X * parallaxFactor;
-        const parallaxOffsetY = effectiveParallaxInputY * PARALLAX_STRENGTH_Y * parallaxFactor;
+        // Combine mouse position and scroll influence for parallax input
+        const effectiveParallaxInputX = (mousePosition.x * BASE_PARALLAX_STRENGTH_X) + (scrollInfluence.x * BASE_PARALLAX_STRENGTH_X);
+        const effectiveParallaxInputY = (mousePosition.y * BASE_PARALLAX_STRENGTH_Y) + (scrollInfluence.y * BASE_PARALLAX_STRENGTH_Y);
+
+        // Apply the overall parallaxStrength prop and the depth factor
+        const parallaxOffsetX = effectiveParallaxInputX * parallaxStrength * parallaxDepthFactor;
+        const parallaxOffsetY = effectiveParallaxInputY * parallaxStrength * parallaxDepthFactor;
 
         // Apply parallax offset to the target position
         finalTargetPosition = baseTargetPosition.clone().add(new THREE.Vector3(parallaxOffsetX, parallaxOffsetY, 0));
@@ -94,10 +123,15 @@ const VideoItem = forwardRef(({ url, title, description, target, isFocused, isSc
 
       // 4. Lerp rotation to face camera when focused, or default otherwise
       if (isFocused) {
-        const targetQuaternion = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, 0)); // No rotation
-        meshRef.current.quaternion.slerp(targetQuaternion, currentRotationLerp);
+        // Look at the camera's position (or slightly in front)
+        const lookAtPosition = camera.position.clone();
+        meshRef.current.lookAt(lookAtPosition);
+        // If you want it perfectly upright, you might need to set X and Z rotation to 0 after lookAt
+        meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, 0, currentRotationLerp);
+        meshRef.current.rotation.z = THREE.MathUtils.lerp(meshRef.current.rotation.z, 0, currentRotationLerp);
       } else {
-        const originalRotation = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, 0)); // Or your default rotation
+        // Return to an arbitrary original rotation (e.g., identity or a slight tilt)
+        const originalRotation = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, 0)); // No rotation
         meshRef.current.quaternion.slerp(originalRotation, currentRotationLerp);
       }
     }

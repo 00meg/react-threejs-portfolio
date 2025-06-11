@@ -19,17 +19,18 @@ function App() {
   // Adjust camera Z based on screen width for responsive viewing
   useEffect(() => {
     const handleResize = () => {
+      // Set distinct camera Z positions for desktop and mobile
       if (window.innerWidth < 768) {
-        setCameraZ(20); // Pull camera back for mobile to make room for UI
+        setCameraZ(20); // A bit further back for mobile to get a wider view
       } else {
-        setCameraZ(15); // Default desktop camera Z
+        setCameraZ(15); // Original and good desktop camera Z
       }
     };
 
     window.addEventListener('resize', handleResize);
     handleResize(); // Call once on mount to set initial camera Z
     return () => window.removeEventListener('resize', handleResize); // Cleanup
-  }, []);
+  }, []); // Depend only on initial render, window.innerWidth is external to R3F's state
 
   // Class to apply blur to the canvas when modals are open
   const blurClass = showContact || showAbout ? 'blurred' : '';
@@ -139,20 +140,22 @@ function App() {
         </div>
 
         <p className="bottom-text">
-          i craft digital ecosystems and cross-media experiences where design, storytelling, and technology converge.
-          my work spans immersive installations, web platforms, and brand identities—merging UI/UX, audiovisual composition, and spatial narratives to create sensorial, dynamic, and intentional experiences.
+        i design interactive systems across digital and physical formats—ranging from websites and installations to motion graphics and audiovisual environments.
+        i work on UI/UX design, audiovisual production for immersive spaces, and motion content for web and communication. across everything, i focus on creating experiences where content, design, and technology work together through a cross-media, narrative-driven approach.
         </p>
 
         {/* Vertical slider to manually adjust layout (for testing/debug) */}
-        {/* Keeping for potential debugging, but can be hidden in production by default */}
-        <input
-          type="range"
-          min="0"
-          max="50"
-          value={layoutSeed % 100}
-          className="vertical-slider"
-          onChange={(e) => setLayoutSeed(Number(e.target.value))}
-        />
+        {/* Only show slider on desktop as it consumes too much space on mobile */}
+        {window.innerWidth > 768 && (
+          <input
+            type="range"
+            min="0"
+            max="50"
+            value={layoutSeed % 100}
+            className="vertical-slider"
+            onChange={(e) => setLayoutSeed(Number(e.target.value))}
+          />
+        )}
       </div>
 
       {/* Modals rendered with Framer Motion for animations */}

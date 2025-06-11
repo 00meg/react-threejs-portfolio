@@ -1,0 +1,138 @@
+/* src/components/VideoCarousel.css */
+
+.video-carousel-container {
+    position: fixed; /* Position fixed to overlay on content */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(20, 20, 20, 0.8); /* Semi-transparent background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 5; /* Above canvas, below modals */
+    padding: 1rem 0;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+    color: #c0c0c0;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    white-space: nowrap; /* Prevent items from wrapping */
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Vertically align items */
+    gap: 1rem; /* Spacing between items */
+}
+
+/* Hide scrollbar for a cleaner look */
+.video-carousel-container::-webkit-scrollbar {
+    display: none;
+}
+.video-carousel-container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+
+.video-carousel-content {
+    display: flex;
+    padding: 0 1rem; /* Padding at ends of carousel */
+}
+
+.video-carousel-item {
+    flex-shrink: 0; /* Prevent items from shrinking */
+    width: 160px; /* Fixed width for each item */
+    height: 120px; /* Fixed height for each item */
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #333; /* Placeholder background */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align content to bottom */
+    position: relative;
+    transition: transform 0.2s ease-in-out;
+    border: 1px solid #4a4a4a;
+}
+
+.video-carousel-item:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.video-info {
+    position: relative;
+    z-index: 2; /* Ensure info is above thumbnail */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+    padding: 0.5rem;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+    white-space: normal; /* Allow text to wrap within info box */
+}
+
+.video-info h3 {
+    margin: 0;
+    font-size: 0.9em;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+}
+
+/* Mobile specific adjustments for the carousel */
+.video-carousel-container.mobile-carousel {
+    bottom: 0; /* Always at the bottom for mobile */
+    left: 0;
+    right: 0;
+    padding-bottom: env(safe-area-inset-bottom); /* Account for iPhone notch */
+}
+
+/* Desktop specific adjustments */
+.video-carousel-container.desktop-carousel {
+    bottom: 0; /* Align to bottom when active */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    max-width: 90vw; /* Don't take full width */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+/* Toggle button styling */
+.toggle-carousel-button {
+    position: absolute;
+    bottom: calc(0.5rem + 120px + 10px); /* Height of carousel + padding + spacing */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 6; /* Above carousel */
+    padding: 0.5rem 1rem;
+    background-color: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid #4a4a4a;
+    border-radius: 5px;
+    color: #c0c0c0;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-carousel-button:hover {
+    background-color: rgba(50, 50, 50, 0.9);
+}
+
+/* Move bottom-text up when carousel is active on desktop */
+.app-with-carousel .bottom-text {
+    margin-bottom: 150px; /* Adjust based on carousel height + desired gap */
+    transition: margin-bottom 0.5s ease-in-out;
+}
