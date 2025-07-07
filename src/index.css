@@ -60,7 +60,6 @@
     margin: 0;
     font-family: 'Source Code Pro', monospace;
     font-weight: 300;
-    text-transform: lowercase;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #0d0d0d;
@@ -236,9 +235,8 @@
     font-family: 'Source Code Pro', monospace;
     font-weight: 700;
     font-size: 0.9rem;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-    text-transform: lowercase;
+      border-radius: 4px;
+  transition: background-color 0.3s;
   }
   
   .contact-form button:hover:not(:disabled) {

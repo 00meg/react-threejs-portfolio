@@ -1,169 +1,71 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { AnimatePresence, motion } from 'framer-motion'; // Import motion from framer-motion
-import VideoScene from './components/VideoScene';
-import ContactForm from './components/ContactForm';
-import AboutPage from './components/AboutPage';
+// src/App.js
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { AnimatePresence } from 'framer-motion';
 
-import './index.css';
+// Theme and Global Styles
+import { darkTheme, lightTheme } from './styles/theme';
+import GlobalStyles from './styles/GlobalStyles';
+
+// Components
+import Header from './components/Header';
+import Footer from './components/Footer';
+import ContactForm from './components/ContactForm';
+import ScrollToTop from './components/ScrollToTop'; // 1. Import the component
+
+// Pages
+import HomePage from './pages/HomePage';
+import WorksPage from './pages/WorksPage';
+import ProjectPage from './pages/ProjectPage';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   const [showContact, setShowContact] = useState(false);
-  const [showAbout, setShowAbout] = useState(false);
-  const [layoutSeed, setLayoutSeed] = useState(0); // Controls video scattering
-  const [cameraZ, setCameraZ] = useState(15); // Z-position of the camera
-  const [isAnyVideoFocusedInScene, setIsAnyVideoFocusedInScene] = useState(false); // Tracks if any video is focused
-  const [flash, setFlash] = useState(false); // State for the background flash effect
-  const flashTimeout = useRef(null);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
-  // Adjust camera Z based on screen width for responsive viewing
-  useEffect(() => {
-    const handleResize = () => {
-      // Set distinct camera Z positions for desktop and mobile
-      if (window.innerWidth < 768) {
-        setCameraZ(20); // A bit further back for mobile to get a wider view
-      } else {
-        setCameraZ(15); // Original and good desktop camera Z
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Call once on mount to set initial camera Z
-    return () => window.removeEventListener('resize', handleResize); // Cleanup
-  }, []); // Depend only on initial render, window.innerWidth is external to R3F's state
-
-  // Class to apply blur to the canvas when modals are open
-  const blurClass = showContact || showAbout ? 'blurred' : '';
-
-  // Callback to trigger the white flash effect
-  const triggerFlash = useCallback(() => {
-    setFlash(true);
-    clearTimeout(flashTimeout.current); // Clear any existing timeout
-    flashTimeout.current = setTimeout(() => {
-      setFlash(false);
-    }, 200); // Short flash duration (200ms)
-  }, []);
-
-
-  // Callbacks for closing modals
-  const handleCloseModals = useCallback(() => {
-    setShowContact(false);
-    setShowAbout(false);
-    triggerFlash(); // Flash when modals close
-  }, [triggerFlash]);
-
-  // Callbacks for showing modals
-  const handleShowAbout = useCallback(() => {
-    setShowContact(false);
-    setShowAbout(true);
-    triggerFlash(); // Flash when About modal opens
-  }, [triggerFlash]);
-
-  const handleShowContact = useCallback(() => {
-    setShowAbout(false);
+  const handleShowContact = () => {
     setShowContact(true);
-    triggerFlash(); // Flash when Contact modal opens
-  }, [triggerFlash]);
+  };
 
-  // Callback to request a rearrange. This will update the layoutSeed.
-  const handleRearrangeRequest = useCallback(() => {
-    // Use a small random increment to ensure a new, slightly different layout each time
-    setLayoutSeed(s => s + Math.random() * 0.1 + 0.1);
-  }, []);
+  const handleCloseModals = () => {
+    setShowContact(false);
+  };
 
-  // Handles clicks on the main canvas container
-  const triggerRearrangeOrClose = useCallback(() => {
-    if (showContact || showAbout) {
-      // If a modal is open, close it (handleCloseModals will trigger flash)
-      handleCloseModals();
-    } else {
-      // If no modals are open AND no video is currently focused,
-      // trigger a rearrange (new random layout). This is the original behavior.
-      // If a video *is* focused, VideoScene will handle defocusing and then
-      // trigger `handleRearrangeRequest` itself via its useEffect.
-      // The flash for video interactions is handled directly by VideoScene now.
-      if (!isAnyVideoFocusedInScene) {
-        handleRearrangeRequest();
-      }
-    }
-  }, [showContact, showAbout, handleCloseModals, isAnyVideoFocusedInScene, handleRearrangeRequest]);
-
-  // Callback from VideoScene to inform App.js about video focus state
-  const handleVideoFocusStateChange = useCallback((isFocused) => {
-    setIsAnyVideoFocusedInScene(isFocused);
-    // Flash is now triggered directly by VideoItem/VideoScene's click handler
-    // so no need to trigger it here based on focus state change.
-  }, []);
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
   return (
-    <div className="main-container">
-      {/* Flash effect overlay */}
-      {flash && (
-        <motion.div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'white',
-            zIndex: 3, // Ensure it's above canvas but below modals
-            pointerEvents: 'none', // Allow clicks to pass through
-          }}
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 0 }}
-          transition={{ duration: 0.2, ease: 'easeOut' }}
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <GlobalStyles />
+      <BrowserRouter>
+        <ScrollToTop /> {/* 2. Add the component here */}
+        <Header
+          onShowContact={handleShowContact}
+          isDarkMode={isDarkMode}
+          toggleTheme={toggleTheme}
         />
-      )}
 
-      {/* The 3D canvas container, which gets blurred when modals are open */}
-      <div id="canvas-container" className={blurClass} onClick={triggerRearrangeOrClose}>
-        <Canvas camera={{ position: [0, 0, cameraZ] }}>
-          <VideoScene
-            layoutSeed={layoutSeed} // Passed to trigger new layout arrangement
-            onVideoFocusStateChange={handleVideoFocusStateChange} // Callback to update App.js focus state
-            onRearrangeRequest={handleRearrangeRequest} // Callback for VideoScene to request a new layout
-            onInteraction={triggerFlash} // Pass triggerFlash to VideoScene
-          />
-        </Canvas>
-      </div>
+        {/* Main page content */}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/works" element={<WorksPage />} />
+          <Route path="/work/:projectId" element={<ProjectPage />} />
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
 
-      {/* UI elements that sit on top of the canvas */}
-      <div className="ui-foreground-container">
-        <div className="nav-container">
-          <button onClick={handleShowAbout} className="nav-link">
-            about me
-          </button>
-          <button onClick={handleShowContact} className="nav-link">
-            let's chat
-          </button>
-        </div>
+        {/* Add Footer and connect the contact click handler */}
+        <Footer onContactClick={handleShowContact} />
 
-        <p className="bottom-text">
-        i design interactive systems across digital and physical formats—ranging from websites and installations to motion graphics and audiovisual environments.
-        i work on UI/UX design, audiovisual production for immersive spaces, and motion content for web and communication. across everything, i focus on creating experiences where content, design, and technology work together through a cross-media, narrative-driven approach.
-        </p>
-
-        {/* Vertical slider to manually adjust layout (for testing/debug) */}
-        {/* Only show slider on desktop as it consumes too much space on mobile */}
-        {window.innerWidth > 768 && (
-          <input
-            type="range"
-            min="0"
-            max="50"
-            value={layoutSeed % 100}
-            className="vertical-slider"
-            onChange={(e) => setLayoutSeed(Number(e.target.value))}
-          />
-        )}
-      </div>
-
-      {/* Modals rendered with Framer Motion for animations */}
-      <AnimatePresence>
-        {showContact && <ContactForm onBack={handleCloseModals} />}
-        {showAbout && <AboutPage onBack={handleCloseModals} />}
-      </AnimatePresence>
-    </div>
+        {/* Contact Modal with animation */}
+        <AnimatePresence mode="wait">
+          {showContact && (
+            <ContactForm key="contact" onBack={handleCloseModals} />
+          )}
+        </AnimatePresence>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

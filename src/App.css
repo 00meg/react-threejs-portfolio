@@ -3,12 +3,11 @@
 body {
   margin: 0;
   font-family: 'Helvetica Light', sans-serif;
-  text-transform: lowercase; /* All text lowercase by default */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #141414;
   color: #C0C0C0;
-  overflow: hidden; 
+  overflow-y: auto; /* Allow scrolling for future content */
 }
 
 a {
@@ -21,61 +20,56 @@ a:hover {
   opacity: 0.7;
 }
 
-/* --- FINAL LAYERING SOLUTION --- */
+/* --- Simplified Layout --- */
 .main-container {
   width: 100vw;
-  height: 100vh;
-  position: relative; 
-  display: flex; /* These are for centering the contact form */
+  min-height: 100vh;
+  position: relative; /* For modal positioning */
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#canvas-container {
-  position: absolute;
-  top: 0;
-  left: 0;
+.ui-foreground-container {
   width: 100%;
-  height: 100%;
-  z-index: 1; /* Background layer */
+  height: 100vh; /* Takes full viewport height */
+  max-width: 1600px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column; /* Stacks children vertically */
+  justify-content: space-between; /* Pushes nav to top, text to bottom */
 }
 
-.ui-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2; /* UI layer on top of canvas */
-}
-
-.logo {
-  width: 100px; /* Explicit size */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.nav-container {
+  text-align: right;
 }
 
 .nav-link {
-  position: absolute;
-  top: 20px;
-  right: 20px;
   font-size: 0.9rem;
+  background: none;
+  border: none;
+  color: #C0C0C0;
+  cursor: pointer;
+  padding: 10px;
+  margin-left: 15px;
+}
+
+.content-area {
+  flex-grow: 1; /* This will take up the available space in the middle */
 }
 
 .bottom-text {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
   font-size: 0.8rem;
   color: #c0c0c0a0;
   line-height: 1.6;
+  max-width: 900px;
 }
 
+/* --- Modal and Form Styling --- */
+/* This section contains the necessary styles for your pop-up forms. */
 
-/* --- FINAL CONTACT FORM STYLING --- */
-.contact-container {
+.contact-container, .about-container {
   z-index: 10;
   width: 100%;
   max-width: 400px;
@@ -84,7 +78,10 @@ a:hover {
   backdrop-filter: blur(15px);
   border-radius: 6px;
   border: 1px solid #2a2a2a;
-  position: relative; 
+  position: fixed; /* Fixed position to overlay on top of all content */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
 }
 
@@ -92,15 +89,15 @@ a:hover {
     position: absolute;
     top: 18px;
     left: 20px;
-    font-size: 1.8rem; /* Slightly larger */
+    font-size: 1.8rem;
     font-weight: bold;
     color: #c0c0c0a0;
     transition: color 0.3s;
 }
 
 .back-arrow-link:hover {
-    color: #ffffff; /* Brighter on hover */
-    opacity: 1; /* Override default link opacity */
+    color: #ffffff;
+    opacity: 1;
 }
 
 .contact-container h2 {
@@ -110,7 +107,7 @@ a:hover {
 }
 
 .contact-info {
-  margin-bottom: 2.5rem; /* Increased padding below text */
+  margin-bottom: 2.5rem;
   margin-top: 0.5rem;
   font-size: 0.8rem;
   color: #c0c0c0a0;
@@ -137,13 +134,11 @@ a:hover {
   font-size: 0.9rem;
   border-radius: 4px;
   transition: border-color 0.3s;
-  text-transform: lowercase; /* Ensure placeholder is lowercase */
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
   color: #c0c0c070;
-  text-transform: lowercase;
 }
 
 .form-group input:focus,
@@ -164,7 +159,6 @@ a:hover {
   font-size: 0.9rem;
   border-radius: 4px;
   transition: background-color 0.3s;
-  text-transform: lowercase;
 }
 
 .contact-form button:hover:not(:disabled) {
