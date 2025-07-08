@@ -40,28 +40,28 @@ const aboutData = [
 // Data for the image stack including scattered positions
 const imageData = [
   {
-    src: '/me1.jpg', // Changed from /me.jpeg
+    src: '/mee.png',
     alt: 'A portrait of Meg',
-    z: 1, // Base z-index
-    rotate: -10,
-    x: '-25%', // Horizontal offset
-    y: '10%',  // Vertical offset
+    z: 1,
+    rotate: -8, // Reduced rotation
+    x: '-45%',
+    y: '-25%',  // Moved slightly more towards the bottom (less negative)
   },
   {
-    src: '/me2.jpg', // Changed from /me.jpeg
+    src: '/me1.jpg',
     alt: 'Meg working on a project',
     z: 2,
-    rotate: 6,
-    x: '20%',
-    y: '-15%',
+    rotate: 5, // Reduced rotation
+    x: '35%',
+    y: '0%',
   },
   {
-    src: '/me.jpeg', // Changed from /me.jpeg
+    src: '/me2.jpg',
     alt: 'A candid shot of Meg',
     z: 0,
-    rotate: 15,
-    x: '0%',
-    y: '25%',
+    rotate: 10, // Reduced rotation
+    x: '-15%',
+    y: '50%',
   },
 ];
 
@@ -142,8 +142,9 @@ const ImageStackContainer = styled(motion.div)`
   width: clamp(280px, 30vw, 400px);
   height: calc(clamp(280px, 30vw, 400px) * 1.25);
   justify-self: center;
-  align-self: end;
-  margin-bottom: 5vh;
+  align-self: center;
+  margin-top: -5vh; 
+  margin-bottom: 0; 
   
   @media (max-width: 968px) {
     order: 1;
@@ -349,11 +350,11 @@ const AboutPage = () => {
   const smoothHeroProgress = useSpring(heroProgress, { stiffness: 100, damping: 30 });
   const textY = useTransform(smoothHeroProgress, [0, 1], ["0%", "-20%"]);
 
-  // Individual parallax transforms for each image
+  // Individual parallax transforms for each image - adjusted for stronger vertical differentiation
   const parallaxTransforms = [
-    useTransform(smoothHeroProgress, [0, 1], ["0%", "-25%"]),
-    useTransform(smoothHeroProgress, [0, 1], ["0%", "-15%"]),
-    useTransform(smoothHeroProgress, [0, 1], ["0%", "-5%"])
+    useTransform(smoothHeroProgress, [0, 1], ["0%", "-25%"]), // Moves up
+    useTransform(smoothHeroProgress, [0, 1], ["0%", "-5%"]),  // Stays relatively central
+    useTransform(smoothHeroProgress, [0, 1], ["0%", "15%"])   // Moves down (positive value)
   ];
 
   useEffect(() => {
@@ -382,7 +383,7 @@ const AboutPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
           >
-            <Typewriter text="I design experiences." />
+            <Typewriter text="Driven by purpose." />
           </Title>
           
           <IntroText
@@ -390,10 +391,13 @@ const AboutPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
           >
-            I'm a designer and creative developer working across digital experiences, 
-            installations, and interactive systems. I’ve always been drawn to making — 
-            not just things that work, but things that mean something. Creating is how 
-            I explore, connect, and make sense of the world.
+            For me, creating isn’t just a job — it’s a way of being in the world.
+Every project I take on is a space of meaning: a chance to explore, to connect, to build something that resonates. I don’t just want to make things that work — I want to make things that matter.
+That move people. That carry intention, clarity, and care.
+
+I come from a hybrid path — psychology and media design — which means I look at systems both emotionally and structurally. I think about interfaces, spaces, and experiences as narratives in motion: alive, responsive, open to interaction.
+
+
           </IntroText>
           
           <IntroText
@@ -401,11 +405,10 @@ const AboutPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
           >
-            With a background in psychology and media design, I approach each project 
-            with both structure and sensitivity — thinking about how things function, 
-            but also how they feel. I care about the full journey: from the first 
-            idea to the final interaction. My goal is to build systems that are 
-            coherent, expressive, and human.
+            From the first spark to the final layer of polish, I’m involved. I like to be inside the process — designing, developing, refining. Not just crafting how something functions, but how it feels, and why it’s there in the first place.
+
+Because in the end, I believe every detail is a chance to say something.
+To create meaning — and leave a trace.
           </IntroText>
         </HeroContent>
 
@@ -413,15 +416,13 @@ const AboutPage = () => {
           {imageData.map((image, index) => (
             <StackedImage
               key={index}
-              style={{ y: parallaxTransforms[index] }}
+              style={{ x: image.x, y: `calc(${image.y} + ${parallaxTransforms[index].get()})` }} 
               initial={{
                 scale: 0.8,
                 opacity: 0,
               }}
               animate={{
                 opacity: 1,
-                x: image.x,
-                y: image.y,
                 rotate: activeIndex === index ? 0 : image.rotate,
                 scale: getScale(index),
                 zIndex: getZIndex(index, image.z),

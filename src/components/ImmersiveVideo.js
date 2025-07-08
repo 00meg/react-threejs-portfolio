@@ -94,24 +94,9 @@ const TransitionOverlay = styled.div`
   z-index: 1;
 `;
 
-// Debug component (remove in production)
-const DebugInfo = styled.div`
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 10px;
-  font-family: monospace;
-  font-size: 12px;
-  z-index: 9999;
-  border-radius: 4px;
-`;
-
 const ImmersiveVideo = () => {
   const sectionRef = useRef(null);
   const [videoState, setVideoState] = useState('initial');
-  const [scrollPercent, setScrollPercent] = useState(0);
   const [overlayOpacity, setOverlayOpacity] = useState(0);
   const lastProgress = useRef(0);
 
@@ -126,8 +111,6 @@ const ImmersiveVideo = () => {
       const totalHeight = sectionRef.current.offsetHeight - window.innerHeight;
       const progress = Math.max(0, Math.min(1, scrolled / totalHeight));
       
-      setScrollPercent(Math.round(progress * 100));
-
       // Smooth state transitions with adjusted boundaries
       let newState = 'initial';
       let newOverlayOpacity = 0;
@@ -199,30 +182,22 @@ const ImmersiveVideo = () => {
   };
 
   return (
-    <>
-      {/* Remove in production */}
-      <DebugInfo>
-        <div>Scroll: {scrollPercent}%</div>
-        <div>State: {videoState}</div>
-      </DebugInfo>
-      
-      <VideoSection ref={sectionRef}>
-        <StickyContainer>
-          <VideoWrapper className={getVideoClasses()}>
-            <VideoContainer>
-              <StyledVideo
-                src="/kollateral.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-              />
-              <TransitionOverlay $opacity={overlayOpacity} />
-            </VideoContainer>
-          </VideoWrapper>
-        </StickyContainer>
-      </VideoSection>
-    </>
+    <VideoSection ref={sectionRef}>
+      <StickyContainer>
+        <VideoWrapper className={getVideoClasses()}>
+          <VideoContainer>
+            <StyledVideo
+              src="/kollateral.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+            <TransitionOverlay $opacity={overlayOpacity} />
+          </VideoContainer>
+        </VideoWrapper>
+      </StickyContainer>
+    </VideoSection>
   );
 };
 
