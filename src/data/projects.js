@@ -118,10 +118,9 @@ export const projects = [
       },
       {
         type: 'imageGrid',
-        columns: 2,
-        aspectRatio: '16 / 9',
+        columns: 1,
+        aspectRatio: 'auto',
         images: [
-          '/projects/chupa-chups/intro1.png',
           '/projects/chupa-chups/intro2.png',
           '/projects/chupa-chups/intro3.png',
           '/projects/chupa-chups/intro4.png',
@@ -229,57 +228,25 @@ export const projects = [
           '/projects/netflix/response4.png',
         ]
       },
-
       {
         type: 'heading',
-        text: 'Key Features'
+        text: 'UI & Keyfeatures'
       },
       {
         type: 'details',
-        text: 'Netflix Lounge adds a social layer to the platform, allowing users to create and share custom watchlists and discover content through trusted friend recommendations. This shared experience encourages emotional connection and transforms Netflix into a space of connection as well as consumption.'
-      },
-      {
-        type: 'floatingImageGrid',
-        images: ['/projects/netflix/keyfeature1.png']
-      },
-      {
-        type: 'floatingImageGrid',
-        images: ['/projects/netflix/keyfeature2.png']
-      },
-      {
-        type: 'heading',
-        text: 'UI Refresh'
-      },
-      {
-        type: 'details',
-        text: 'The interface was visually refined using a glassmorphism aesthetic, bringing clarity and depth to the experience.<br/><br/>The overall iconography and interface elements were carefully adapted to align with the new social functionalities, ensuring a cohesive and intuitive look & feel.'
+        text: 'Netflix Lounge adds a social layer to the platform, allowing users to create and share custom watchlists and discover content through trusted friend recommendations. This shared experience encourages emotional connection and transforms Netflix into a space of connection as well as consumption.<br/><br/>The interface was visually refined using a glassmorphism aesthetic, bringing clarity and depth to the experience. The overall iconography and interface elements were carefully adapted to align with the new social functionalities, ensuring a cohesive and intuitive look & feel.'
       },
       {
         type: 'imageGrid',
-        columns: 2,
-        aspectRatio: '16 / 9',
+        columns: 3,
+        aspectRatio: 'auto',
         images: [
-          '/projects/netflix/refresh1.png',
-          '/projects/netflix/refresh2.png',
-        ]
-      },
-      {
-        type: 'heading',
-        text: 'UI'
-      },
-      {
-        type: 'details',
-        text: 'The user interface was designed to be intuitive and clean, integrating the new social features seamlessly into the existing Netflix experience. The focus was on clarity and ease of navigation, ensuring that social interactions feel like a natural extension of content discovery.'
-      },
-      {
-        type: 'imageGrid',
-        columns: 2,
-        aspectRatio: '16/9',
-        images: [
-          '/projects/netflix/keyfeature1.png',
-          '/projects/netflix/keyfeature2.png',
-          '/projects/netflix/refresh1.png',
-          '/projects/netflix/refresh2.png',
+          '/projects/netflix/ui1.png',
+          '/projects/netflix/ui2.png',
+          '/projects/netflix/ui3.png',
+          '/projects/netflix/ui5.png',
+          '/projects/netflix/ui6.png',
+          '/projects/netflix/ui7.png',
         ]
       },
       {

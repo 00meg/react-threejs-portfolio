@@ -236,7 +236,7 @@ const MediaItemContainer = styled(motion.div)`
 
 // UPDATED: Fixed media image wrapper
 const MediaImageWrapper = styled.div`
-  height: 45vh;
+  height: 55vh;
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
@@ -342,18 +342,22 @@ const NavLink = styled(Link)`
 
 
 // --- RENDERER COMPONENTS ---
-const ParallaxWrapper = ({ children, speed = -3 }) => {
+const ParallaxWrapper = ({ children, speed = -1, type = 'default' }) => {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({
       target: ref,
       offset: ['start end', 'end start'],
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], [`${speed}%`, `${-speed}%`]);
+    // Disable parallax for headings and certain content types to prevent overlapping
+    const shouldDisableParallax = type === 'heading' || type === 'overview';
+    const effectiveSpeed = shouldDisableParallax ? 0 : speed;
+
+    const y = useTransform(scrollYProgress, [0, 1], [`${effectiveSpeed}%`, `${-effectiveSpeed}%`]);
     const smoothY = useSpring(y, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
     return (
-      <motion.div ref={ref} style={{ y: smoothY }}>
+      <motion.div ref={ref} style={{ y: shouldDisableParallax ? 0 : smoothY }}>
         {children}
       </motion.div>
     );
@@ -370,7 +374,7 @@ const ContentRenderer = ({ content }) => {
     };
 
     return (
-        <ParallaxWrapper key={index}>
+        <ParallaxWrapper key={index} type={block.type} speed={-0.5}>
             {(() => {
                 switch (block.type) {
                 
