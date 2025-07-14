@@ -6,7 +6,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 const approachData = [
   {
     number: '01',
-    title: 'Creative Process & Tool Design',
+    title: 'Creative Process',
     description: 'I design systems that support ideation, prototyping, and creative workflows — from real-time visual tools to modular setups that extend and streamline the design process itself.'
   },
   {
