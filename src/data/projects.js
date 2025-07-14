@@ -1,8 +1,191 @@
+// Standardized Category Tags - Keep these consistent across all projects
+export const CATEGORY_TAGS = {
+  ART_DIRECTION: 'Art Direction',
+  STRATEGY_CONCEPT: 'Strategy & Concept', 
+  UI_UX: 'UI/UX',
+  MOTION_AV: 'Motion / AV',
+  CREATIVE_TECHNOLOGY: 'Creative Technology',
+  IMMERSIVE_INSTALLATION: 'Immersive Installation',
+  BRANDING: 'Branding'
+};
+
 export const projects = [
+  {
+    id: 'forum-archive-reverie',
+    title: 'Forum – Archive Reverie',
+    categories: [CATEGORY_TAGS.ART_DIRECTION, CATEGORY_TAGS.CREATIVE_TECHNOLOGY, CATEGORY_TAGS.MOTION_AV],
+    year: '2025',
+    images: {
+      cover: '/projects/forum/cover.png',
+    },
+    content: [
+      {
+        type: 'overview',
+        text: 'Forum – Archive Reverie is an immersive, interactive, cross-media ecosystem designed to celebrate the 55th anniversary of the iconic Forum Studios. At its core lies a dynamic archive, continuously evolving into new narratives, adaptable across diverse contexts and modes of exploration.'
+      },
+      {
+        type: 'mainVideo',
+        videoUrl: '/projects/forum/intro.mp4',
+      },
+      {
+        type: 'heading',
+        text: 'My Role'
+      },
+      {
+        type: 'details',
+        text: 'Art Direction, Creative Technology, Motion / AV, and Interactive Development.'
+      },
+      {
+        type: 'heading',
+        text: 'Context & Brief'
+      },
+      {
+        type: 'details',
+        text: 'Forum Studios, an iconic pillar of Italian cinema and music, sought to reinterpret its rich 55-year audiovisual legacy through an interactive and immersive experience.<br/><br/><b>Challenge:</b><br/>Transform a vast archive of films, music, and cultural fragments into a coherent, emotionally resonant digital ecosystem—flexible enough to adapt dynamically across different spaces and modes of exploration.<br/><br/><b>Solution:</b><br/>I designed a dynamic archive ecosystem that evolves through user interaction, generating new narratives, revealing hidden connections, and creating an immersive journey through memory and emotion.'
+      },
+      {
+        type: 'videoGrid',
+        columns: 1,
+        aspectRatio: '16 / 9',
+        videos: [
+          '/projects/forum/intro2.mp4',
+        ]
+      },
+      {
+        type: 'heading',
+        text: 'Interactive Archive'
+      },
+      {
+        type: 'details',
+        text: 'I reimagined the archive as a responsive, three-dimensional space, inviting intuitive and personal exploration.<br/><br/><b>A Living Landscape</b><br/>Rejecting linear navigation, I created a reactive 3D environment hosting over 500 audiovisual items—films, images, and sounds—that dynamically rearrange to reveal unexpected connections as users navigate.<br/><br/><b>Immersive Audioplayer</b><br/>Activating content triggers related audio tracks, visualized through a real-time animated waveform inspired by the Forum logo. The archive generates a dynamic sonic environment, constantly adapting to user position and interactions.'
+      },
+      {
+        type: 'videoGrid',
+        columns: 1,
+        aspectRatio: '16 / 9',
+        videos: [
+          '/projects/forum/interaction.mp4',
+        ]
+      },
+      {
+        type: 'videoGrid',
+        columns: 1,
+        aspectRatio: '16 / 9',
+        videos: [
+          '/projects/forum/archive-grid.mp4',
+        ]
+      },
+      {
+        type: 'videoGrid',
+        columns: 1,
+        aspectRatio: '16 / 9',
+        videos: [
+          '/projects/forum/archive-row.mp4',
+        ]
+      },
+      {
+        type: 'heading',
+        text: 'Smartphone Controller'
+      },
+      {
+        type: 'details',
+        text: 'Visitors scan a QR code, accessing a tactile, custom-designed controller. I designed the interface emphasizing intuitive navigation without visual distraction, enabling effortless control of large-scale installations.'
+      },
+      {
+        type: 'videoGrid',
+        columns: 1,
+        aspectRatio: '16 / 9',
+        videos: [
+          '/projects/forum/controller.mp4',
+        ]
+      },
+      {
+        type: 'heading',
+        text: 'Process & Technical Approach'
+      },
+      {
+        type: 'details',
+        text: 'To ensure narrative and visual coherence across multiple interactive and immersive experiences, I developed a unified technological ecosystem built around the central archive.<br/><br/><b>Visual Production Tool: The Archive as Generative Engine</b><br/>At the core lies a flexible technological architecture, turning the interactive archive itself into a generative visual-production tool. This custom-built system enabled coherent reuse of assets, consistent visual language, and creative flexibility across different outputs.'
+      },
+      {
+        type: 'videoGrid',
+        columns: 2,
+        aspectRatio: '16 / 9',
+        videos: [
+          '/projects/forum/demo1.mp4',
+          '/projects/forum/demo2.mp4',
+        ]
+      },
+      {
+        type: 'details',
+        text: '<b>Custom Visual Tool Interface</b><br/>To streamline creative production, I developed an intuitive custom-designed UI within the visual tool. It enabled precise, real-time management of animations, spatial layouts, camera movements, and narrative elements.'
+      },
+      {
+        type: 'videoGrid',
+        columns: 1,
+        aspectRatio: 'auto',
+        videos: [
+            '/projects/forum/tool1.mp4',
+        ]
+      },
+      {
+        type: 'videoGrid',
+        columns: 1,
+        aspectRatio: 'auto',
+        videos: [
+            '/projects/forum/tool2.mp4',
+        ]
+      },
+      {
+        type: 'details',
+        text: '<b>MIDI Integration and Real-Time Control</b><br/>To enhance dynamic creative processes and live performances, I integrated MIDI control directly into the visual tool. This allowed real-time manipulation of visuals during production and performance, adding expressive depth and creative immediacy.'
+      },
+       {
+        type: 'videoGrid',
+        columns: 1,
+        aspectRatio: '16 / 9',
+        videos: [
+          '/projects/forum/midi.mp4',
+        ]
+      },
+      {
+        type: 'details',
+        text: '<b>High-Resolution Visual Exports</b><br/>The visual tool supported exports up to 9600×1080 px, essential for large-scale immersive experiences. Captured MIDI interactions allowed precise dynamic visual outputs closely aligned with narrative intentions.'
+      },
+      {
+        type: 'videoGrid',
+        columns: 2,
+        aspectRatio: '16 / 9',
+        videos: [
+          '/projects/forum/export.mp4',
+          '/projects/forum/export2.mp4',
+        ]
+      },
+      {
+        type: 'heading',
+        text: 'Hybrid Video Production'
+      },
+      {
+        type: 'details',
+        text: 'The final immersive installation combined real-time generative visuals with a sophisticated hybrid workflow. Exports from the tool were enhanced using original video footage and additional animations created in After Effects and TouchDesigner, blending real-time visuals and post-production effects seamlessly.<br/><br/>I refined, manipulated, and layered exported visuals within After Effects, integrating advanced effects, transitions, and animations to heighten the overall visual and narrative impact.'
+      },
+      {
+        type: 'videoGrid',
+        columns: 2,
+        aspectRatio: '16 / 9',
+        videos: [
+          '/projects/forum/video1.mp4',
+          '/projects/forum/video4.mp4',
+          '/projects/forum/video3.mp4',
+          '/projects/forum/video2.mp4',
+        ]
+      },
+    ]
+  },
   {
     id: 'ebay-app-promo',
     title: 'eBay App Promotion',
-    categories: ['Motion', 'Branding', 'Creative Strategy'],
+    categories: [CATEGORY_TAGS.MOTION_AV, CATEGORY_TAGS.STRATEGY_CONCEPT],
     year: '2025',
     images: {
       cover: '/projects/ebay-app-promo/cover.png',
@@ -10,7 +193,7 @@ export const projects = [
     content: [
       {
         type: 'overview',
-        text: 'A strategic campaign to promote the eBay app in Italy. The goal was to refresh its brand communication and connect with a younger demographic through a dynamic motion graphics spot and a revitalized visual language for social media.'
+        text: 'A strategic campaign to promote the eBay app in Italy. The goal was to refresh its brand communication and connect with a younger demographic through dynamic motion graphics and a revitalized visual language for social media.'
       },
       {
         type: 'mainVideo',
@@ -100,9 +283,110 @@ export const projects = [
     ]
   },
   {
+    id: 'kollateral',
+    title: 'KOLLATERAL',
+    categories: [CATEGORY_TAGS.IMMERSIVE_INSTALLATION, CATEGORY_TAGS.MOTION_AV, CATEGORY_TAGS.ART_DIRECTION],
+    year: '2025',
+    images: {
+      cover: '/projects/kollateral/cover.png',
+    },
+    content: [
+      {
+        type: 'details',
+        text: 'A body in motion — through its scars, light emerges.'
+      },
+      {
+        type: 'mainVideo',
+        videoUrl: '/projects/kollateral/kollateral.mp4',
+      },
+      {
+        type: 'heading',
+        text: 'Synopsis'
+      },
+      {
+        type: 'details',
+        text: 'A suspended fabric bears deliberate burns and tears, each acting as a portal for light. Rather than weakening the material, these wounds allow illumination to pass through, creating a mesmerizing interplay of shadow and radiance.'
+      },
+      {
+        type: 'imageGrid',
+        columns: 1,
+        aspectRatio: 'auto',
+        images: [
+          '/projects/kollateral/pic1.png',
+        ]
+      },
+      {
+        type: 'heading',
+        text: 'Concept'
+      },
+      {
+        type: 'details',
+        text: 'Kollateral investigates themes of resilience and rebirth, combining physical sculpture with digitally controlled audiovisual elements. The installation transforms physical damage into dynamic visual poetry: the suspended fabric breathes and moves, animated by sound-driven airflow and synchronized lighting.<br/><br/>This contemplative space invites the audience to perceive trauma not as an ending, but as a transformative beginning.'
+      },
+      {
+        type: 'imageGrid',
+        columns: 1,
+        aspectRatio: 'auto',
+        images: [
+          '/projects/kollateral/pic2.png',
+        ]
+      },
+      {
+        type: 'heading',
+        text: 'Collateral Beauty'
+      },
+      {
+        type: 'details',
+        text: 'The name Kollateral evokes the idea of collateral beauty—light, meaning, and transformation emerging directly from rupture and damage.'
+      },
+      {
+        type: 'heading',
+        text: 'Real-Time Audiovisual Integration'
+      },
+      {
+        type: 'details',
+        text: 'Kollateral is a fully developed, interactive audiovisual installation, tested and ready for deployment.<br/><br/><b>Interactive System Components:</b><br/>Original sound composition (Ableton Live)<br/>Real-time audio analysis controlling visual elements (TouchDesigner)<br/>DMX-controlled lighting and airflow, synchronized via MIDI triggers responding to real-time audio input.<br/><br/>This integration ensures a dynamic, responsive experience, optimized for immersive audience engagement.'
+      },
+      {
+        type: 'imageGrid',
+        columns: 1,
+        aspectRatio: 'auto',
+        images: [
+          '/projects/kollateral/pic3.png',
+        ]
+      },
+      {
+        type: 'heading',
+        text: 'Timecoded Structure & Narrative'
+      },
+      {
+        type: 'details',
+        text: 'Kollateral is structured into multiple acts, synchronized via a precise timecode system. Each act forms part of an abstract narrative arc, aligned with the installation’s themes of transformation and renewal.<br/><br/>Each complete cycle lasts approximately 20 minutes and loops seamlessly, allowing audiences to enter at any point and engage with the evolving rhythmic narrative.'
+      },
+      {
+        type: 'heading',
+        text: 'Performance Capability'
+      },
+      {
+        type: 'details',
+        text: 'Kollateral can also be presented as a live performance, with all three artists directly controlling visual elements, lighting, and performing the original sound composition in real-time.'
+      },
+      {
+        type: 'imageGrid',
+        columns: 1,
+        aspectRatio: 'auto',
+        images: [
+          '/projects/kollateral/pic4.png',
+          '/projects/kollateral/pic5.png',
+          '/projects/kollateral/pic6.png',
+        ]
+      }
+    ]
+  },
+  {
     id: 'chupa-chups-sweet-escape',
     title: 'Chupa Chups – Sweet Escape',
-    categories: ['Creative Strategy', 'Branding', 'UI/UX'],
+    categories: [CATEGORY_TAGS.STRATEGY_CONCEPT, CATEGORY_TAGS.UI_UX],
     year: '2025',
     images: {
       cover: '/projects/chupa-chups/cover.png',
@@ -200,8 +484,8 @@ export const projects = [
   },
   {
     id: 'netflix-lounge',
-    title: 'Netflix Lounge &mdash; Social Streaming',
-    categories: ['UX/UI', 'Creative Strategy', 'Branding'],
+    title: 'Netflix Lounge — Social Streaming',
+    categories: [CATEGORY_TAGS.UI_UX, CATEGORY_TAGS.STRATEGY_CONCEPT],
     year: '2023',
     images: {
       cover: '/projects/netflix/cover.png',
@@ -209,7 +493,7 @@ export const projects = [
     content: [
       {
         type: 'overview',
-        text: 'A strategic concept to reimagine Netflix as a more social, participatory experience. Netflix Lounge was designed to increase user retention and engagement by turning content discovery into something shared, emotional, and customizable.<br/><br/>The project involved concept creation, user research, UX/UI design, prototyping, and a multichannel communication strategy.'
+        text: 'A strategic concept to reimagine Netflix as a more social, participatory experience. Netflix Lounge was designed to increase user retention and engagement by turning content discovery into something shared, emotional, and customizable.<br/><br/>The project involved concept creation, user research, UI/UX design, prototyping, and a multichannel communication strategy.'
       },
       {
         type: 'heading',
@@ -286,7 +570,75 @@ export const projects = [
       },
     ]
   },
-
+  {
+    id: 'edeneve',
+    title: 'EDENEVE',
+    categories: [CATEGORY_TAGS.BRANDING, CATEGORY_TAGS.ART_DIRECTION],
+    year: '2024',
+    images: {
+      cover: '/projects/edeneve/cover.png',
+    },
+    content: [
+      {
+        type: 'overview',
+        text: 'This was a concept proposal for a newly launched cosmetic brand, developed from the ground up after an initial conversation with the client. I worked on defining the brand direction and visual world, crafting a narrative-driven concept and early-stage packaging explorations. The focus was on ideation, aesthetic positioning, and identity system potential.'
+      },
+      {
+        type: 'imageGrid',
+        columns: 1,
+        aspectRatio: 'auto',
+        images: [
+          '/projects/edeneve/01.png',
+          '/projects/edeneve/02.png',
+          '/projects/edeneve/03.png',
+          '/projects/edeneve/04.png',
+          '/projects/edeneve/05.png',
+          '/projects/edeneve/06.png',
+          '/projects/edeneve/07.png',
+          '/projects/edeneve/08.png',
+          '/projects/edeneve/09.png',
+          '/projects/edeneve/10.png',
+          '/projects/edeneve/11.png',
+          '/projects/edeneve/12.png',
+          '/projects/edeneve/13.png',
+          '/projects/edeneve/14.png',
+          '/projects/edeneve/15.png',
+          '/projects/edeneve/16.png',
+          '/projects/edeneve/17.png',
+          '/projects/edeneve/18.png',
+        ]
+      }
+    ]
+  },
+  {
+    id: 'redbull-360',
+    title: 'RedBull 360 – Key Visual',
+    categories: [CATEGORY_TAGS.ART_DIRECTION, CATEGORY_TAGS.BRANDING],
+    year: '2024',
+    images: {
+      cover: '/projects/redbull-360/cover.png',
+    },
+    content: [
+      {
+        type: 'overview',
+        text: 'I designed the key visual for RedBull’s 360 event in Ireland, shaping a bold, immersive graphic identity tailored for both digital and physical environments. The design was used across campaign materials, spatial graphics, and promotional content.'
+      },
+      {
+        type: 'imageGrid',
+        columns: 1,
+        aspectRatio: 'auto',
+        images: [
+          '/projects/redbull-360/01.png',
+          '/projects/redbull-360/02.png',
+          '/projects/redbull-360/03.png',
+          '/projects/redbull-360/04.png',
+          '/projects/redbull-360/05.png',
+          '/projects/redbull-360/06.png',
+          '/projects/redbull-360/07.png',
+        ]
+      }
+    ]
+  },
 ];
 
 const allCategories = projects.flatMap(p => p.categories);

@@ -40,13 +40,13 @@ const approachData = [
 
 const SectionContainer = styled(motion.section)`
   padding: 8rem 3rem;
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
   background-color: ${({ theme }) => theme.colors.primary};
   will-change: transform;
   
   @media (max-width: 768px) {
-    padding: 6rem 1.5rem;
+    padding: 6rem 1rem;
   }
 `;
 
@@ -169,7 +169,7 @@ const ProgressFill = styled(motion.div)`
 const ApproachItem = ({ number, title, description, index }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
-    margin: "0px 0px -50% 0px",
+    margin: "0px 0px -25% 0px",
     amount: 0.3 
   });
   const itemInView = useInView(ref, { 

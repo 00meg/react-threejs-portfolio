@@ -93,29 +93,30 @@ const GlobalStyles = createGlobalStyle`
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* Custom scrollbar styling */
+  /* Custom scrollbar styling - more sophisticated */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
+    height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.colors.primary};
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.colors.secondary};
-    border-radius: 5px;
+    background: ${({ theme }) => theme.colors.secondary}33;
+    border-radius: 4px;
     transition: background 0.3s ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: ${({ theme }) => theme.colors.secondary};
+    background: ${({ theme }) => theme.colors.secondary}66;
   }
 
   /* Firefox scrollbar */
   * {
     scrollbar-width: thin;
-    scrollbar-color: ${({ theme }) => theme.colors.secondary} ${({ theme }) => theme.colors.primary};
+    scrollbar-color: ${({ theme }) => theme.colors.secondary}33 transparent;
   }
 
   a {
@@ -193,6 +194,16 @@ const GlobalStyles = createGlobalStyle`
   *:focus-visible {
     outline: 2px solid ${({ theme }) => theme.colors.secondary};
     outline-offset: 2px;
+  }
+
+  /* Utility class for full-width sections */
+  .full-width {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
   }
 `;
 

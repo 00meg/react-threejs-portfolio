@@ -24,14 +24,14 @@ const HeroSection = styled.section`
   justify-content: center;
   align-items: flex-start;
   padding: 0 3rem;
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
 
   @media (max-width: 768px) {
     height: 80vh;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
   }
 `;
 
@@ -67,15 +67,16 @@ const IntroText = styled(motion.p)`
 `;
 
 const WorksPreviewSection = styled(motion.section)`
-  padding: 0 3rem 6rem;
-  max-width: 1400px;
+  padding: 0 2rem 6rem;
+  width: 100%;
+  max-width: 1600px;
   margin: 0 auto;
   position: relative;
-  margin-top: -15vh; /* Less aggressive pull-up for better initial visibility */
+  margin-top: -15vh;
   z-index: 10;
 
   @media (max-width: 768px) {
-    padding: 0 1.5rem 4rem;
+    padding: 0 1rem 4rem;
     margin-top: -10vh;
   }
 `;
@@ -107,17 +108,17 @@ const WorksSectionHeader = styled.div`
 const ProjectsGrid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.75rem;
-  margin-bottom: 3.5rem;
+  gap: 1.2rem;
+  margin-bottom: 4rem;
   
-  @media (max-width: 1024px) {
+  @media (max-width: 1200px) {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 1rem;
   }
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 2.5rem;
   }
 `;
 
@@ -130,10 +131,10 @@ const ProjectItem = styled(motion.div)`
 const ImageContainer = styled(motion.div)`
   position: relative;
   overflow: hidden;
-  border-radius: 14px;
-  aspect-ratio: 16/12;
+  border-radius: 16px;
+  aspect-ratio: 16/11;
   background: ${({ theme }) => theme.colors.border};
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   
   img {
@@ -141,24 +142,29 @@ const ImageContainer = styled(motion.div)`
     height: 100%;
     object-fit: cover;
     will-change: transform;
+    /* ❌ REMOVED: transform: scale(1.6); */
+    /* Scaling is now handled entirely by Framer Motion variants */
   }
 
   &::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, transparent 70%, rgba(0, 0, 0, 0.2) 100%);
+    background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.3) 100%);
     opacity: 0;
     transition: opacity 0.5s ease;
   }
   
   &:hover {
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px) scale(1.02);
     
     &::after {
       opacity: 1;
     }
+    
+    /* ❌ REMOVED: img hover state */
+    /* This is now handled by the parent's whileHover prop and variants */
   }
 `;
 
@@ -314,10 +320,12 @@ const HomePage = () => {
 
   const featuredProjects = projects.slice(0, 6);
 
-  // Variants for smooth image animations
+  // ✅ UPDATED: Variants for smooth image animations
   const imageVariants = {
-    initial: { scale: 1.1 },
-    hover: { scale: 1.02 }
+    // Initial scale is large enough to cover the container during parallax
+    initial: { scale: 1.3 },
+    // Hover scale is slightly larger for a zoom effect
+    hover: { scale: 1.35 }
   };
 
   return (
@@ -338,7 +346,7 @@ const HomePage = () => {
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         >
           I design and develop digital experiences — from websites and interfaces to immersive installations and audiovisual tools.
-          I work across UI/UX, motion, and code to turn complex ideas into clear, engaging systems.
+          I work across UI/UX, Creative Technology, and Motion / AV to turn complex ideas into clear, engaging systems.
         </IntroText>
       </HeroSection>
 
@@ -380,6 +388,7 @@ const HomePage = () => {
                       <motion.img 
                         src={project.images.cover} 
                         alt={project.title}
+                        initial="initial" /* ✅ ADDED: Explicitly set initial variant */
                         variants={imageVariants}
                         style={{ y: imageParallaxY }}
                         transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}

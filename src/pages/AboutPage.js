@@ -18,7 +18,7 @@ const aboutData = [
   {
     number: '03',
     title: 'I prototype early.',
-    description: 'I believe in testing ideas quickly — through sketches, motion, or code. Prototyping helps me stay grounded and discover what actually works, not just what sounds good on paper.',
+    description: 'I believe in testing ideas quickly — through sketches, Creative Technology, or Motion / AV. Prototyping helps me stay grounded and discover what actually works, not just what sounds good on paper.',
   },
   {
     number: '04',
@@ -28,7 +28,7 @@ const aboutData = [
   {
     number: '05',
     title: 'I build what I imagine.',
-    description: 'I work across design and development — from UX and motion to code and integration. This lets me carry ideas through to the end and make sure the final result stays true to the vision.',
+    description: 'I work across design and development — from UI/UX and Creative Technology to Motion / AV integration. This lets me carry ideas through to the end and make sure the final result stays true to the vision.',
   },
   {
     number: '06',
@@ -81,20 +81,20 @@ const HeroSection = styled.section`
   align-items: center;
   gap: 4rem;
   padding: 0 3rem;
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
   position: relative;
   
   @media (max-width: 968px) {
     grid-template-columns: 1fr;
     min-height: 0;
-    padding: 15vh 1.5rem 8vh;
+    padding: 15vh 1rem 8vh;
     text-align: center;
     gap: 2rem;
   }
 
   @media (max-width: 768px) {
-    padding: 12vh 1.5rem 6vh;
+    padding: 12vh 1rem 6vh;
   }
 `;
 
@@ -205,11 +205,11 @@ const StackedImage = styled(motion.div)`
 
 const MyApproachSection = styled(motion.section)`
   padding: 8rem 3rem 10rem;
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
   
   @media (max-width: 768px) {
-    padding: 6rem 1.5rem 8rem;
+    padding: 6rem 1rem 8rem;
   }
 `;
 
@@ -450,7 +450,8 @@ const AboutPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
             >
-              For me, creating isn't just a job — it's a way of being in the world. Every project I take on is a space of meaning: a chance to explore, to connect, to build something that resonates.
+              For me, creating is how I think. It's how I figure things out — about the world, about people, about systems that need to make sense and feel right.
+              Every project is a mix of logic and intuition. I need to understand what something does, but also what it means, and how it lands on the other side.
             </IntroText>
             
             <IntroText
@@ -458,7 +459,7 @@ const AboutPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
             >
-              I don't just want to make things that work — I want to make things that matter. That move people. That carry intention, clarity, and care.
+              Coming from psychology and media design, I naturally zoom in on how people relate to things — emotionally, cognitively, physically. I design with that in mind. Not just what looks good or works technically, but what creates clarity, curiosity, presence.
             </IntroText>
             
             <IntroText
@@ -466,7 +467,7 @@ const AboutPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6, ease: [0.4, 0, 0.2, 1] }}
             >
-              I come from a hybrid path — psychology and media design — which means I look at systems both emotionally and structurally. I think about interfaces, spaces, and experiences as narratives in motion: alive, responsive, open to interaction.
+              I like being close to the process. Prototyping, adjusting, rebuilding if needed. Tools, interfaces, installations — they're not separate things for me. They're all ways to shape experience, test ideas, and translate something complex into something you can actually feel or navigate.
             </IntroText>
             
             <IntroText
@@ -474,15 +475,8 @@ const AboutPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7, ease: [0.4, 0, 0.2, 1] }}
             >
-              From the first spark to the final layer of polish, I'm involved. I like to be inside the process — designing, developing, refining. Not just crafting how something functions, but how it feels, and why it's there in the first place.
-            </IntroText>
-            
-            <IntroText
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8, ease: [0.4, 0, 0.2, 1] }}
-            >
-              Because in the end, I believe every detail is a chance to say something. To create meaning — and leave a trace.
+              I care about the details, but not for polish's sake. I care because every choice — visual, spatial, functional — is a chance to say something.
+              To make it make sense. To make it matter.
             </IntroText>
           </TextGroup>
         </HeroContent>

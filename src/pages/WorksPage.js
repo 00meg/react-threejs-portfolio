@@ -113,7 +113,7 @@ const ImageContainer = styled(motion.div)`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: scale(1.1);
+    transform: scale(1.15);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
@@ -121,7 +121,7 @@ const ImageContainer = styled(motion.div)`
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
     
     img {
-      transform: scale(1);
+      transform: scale(1.08);
     }
   }
 `;

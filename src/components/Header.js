@@ -1,46 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import HoverAnimatedText from './HoverAnimatedText'; // Import the new component
+import HoverAnimatedText from './HoverAnimatedText';
+import ThemeToggle from './ThemeToggle';
 
-// ... (Keep styled-components the same) ...
 const HeaderContainer = styled(motion.header)`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  padding: 0.75rem 1.5rem;
+  right: 0;
+  padding: 1rem 3rem;
+  background: ${({ theme }) => `${theme.colors.primary}E6`};
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media (max-width: 768px) {
+    padding: 0.8rem 1rem;
+  }
+`;
+
+const NavContainer = styled.div`
+  max-width: 100%;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 100;
-  background: ${({ theme }) => `${theme.colors.primary}E6`};
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-
-  @media (max-width: 768px) {
-    padding: 0.5rem 1rem;
-  }
 `;
 
-const Logo = styled(NavLink)`
-  font-size: 1.1rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: ${({ theme }) => theme.colors.secondary};
-  transition: all 0.3s ease;
-
-  &:hover {
-    font-weight: 700;
-    opacity: 1;
-  }
-`;
-
-const Nav = styled.nav`
+const NavItems = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
   gap: 1.5rem;
 
   @media (max-width: 768px) {
@@ -48,72 +42,94 @@ const Nav = styled.nav`
   }
 `;
 
-const NavItem = styled.button`
-  font-size: 0.9rem;
-  background: none;
-  border: none;
-  color: ${({ theme }) => theme.colors.secondary};
-  padding: 0.4rem 0;
-  position: relative;
-  transition: all 0.3s ease;
-  font-weight: 400;
-
-  &:hover {
-    font-weight: 700;
-  }
-`;
-
 const StyledNavLink = styled(NavLink)`
-  font-size: 0.9rem;
-  background: none;
-  border: none;
-  color: ${({ theme }) => theme.colors.secondary};
-  padding: 0.4rem 0;
-  position: relative;
-  transition: all 0.3s ease;
+  font-size: 0.75rem;
   font-weight: 400;
-
-  &:hover {
-    font-weight: 700;
-    opacity: 1;
-  }
-
-  &.active {
-    font-weight: 700;
-  }
-`;
-
-const ThemeToggle = styled(motion.button)`
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  background: ${({ theme }) => theme.colors.primary};
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: ${({ theme }) => theme.colors.secondary};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 1rem;
-  font-size: 0.8rem;
-  transition: all 0.3s ease;
+  opacity: ${({ $isActive }) => ($isActive ? 1 : 0.5)};
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: ${({ theme }) => theme.colors.secondary};
+    transform: scaleX(${({ $isActive }) => ($isActive ? 1 : 0)});
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
   &:hover {
-    border-color: ${({ theme }) => theme.colors.secondary};
-    font-weight: 700;
-    transform: rotate(180deg);
+    opacity: 1;
+    
+    &::after {
+      transform: scaleX(1);
+    }
   }
 
   @media (max-width: 768px) {
-    margin-left: 0.6rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
   }
+`;
+
+const ContactButton = styled.button`
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.secondary};
+  opacity: 0.5;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: ${({ theme }) => theme.colors.secondary};
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover {
+    opacity: 1;
+    
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+  }
+`;
+
+const ThemeToggleWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 
 const Header = ({ onShowContact, isDarkMode, toggleTheme }) => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const location = useLocation();
 
-  // ... (useEffect logic remains the same) ...
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
@@ -127,33 +143,36 @@ const Header = ({ onShowContact, isDarkMode, toggleTheme }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [prevScrollPos]);
 
+  const navItems = [
+    { path: '/', label: 'HOME' },
+    { path: '/works', label: 'WORKS' },
+    { path: '/about', label: 'ABOUT' },
+  ];
 
   return (
     <HeaderContainer
       animate={{ y: visible ? 0 : -100 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
     >
-      <Logo to="/">
-        <HoverAnimatedText text="Meg" />
-      </Logo>
-      <Nav>
-        <StyledNavLink to="/works" end>
-          <HoverAnimatedText text="Works" />
-        </StyledNavLink>
-        <StyledNavLink to="/about" end>
-          <HoverAnimatedText text="About" />
-        </StyledNavLink>
-        <NavItem onClick={onShowContact}>
-          <HoverAnimatedText text="Contact" />
-        </NavItem>
-        <ThemeToggle
-          onClick={toggleTheme}
-          whileTap={{ scale: 0.9 }}
-          aria-label="Toggle theme"
-        >
-          {isDarkMode ? '☀' : '☾'}
-        </ThemeToggle>
-      </Nav>
+      <NavContainer>
+        <NavItems>
+          {navItems.map((item) => (
+            <StyledNavLink
+              key={item.path}
+              to={item.path}
+              $isActive={location.pathname === item.path}
+            >
+              <HoverAnimatedText text={item.label} />
+            </StyledNavLink>
+          ))}
+          <ContactButton onClick={onShowContact}>
+            <HoverAnimatedText text="CONTACT" />
+          </ContactButton>
+          <ThemeToggleWrapper>
+            <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+          </ThemeToggleWrapper>
+        </NavItems>
+      </NavContainer>
     </HeaderContainer>
   );
 };

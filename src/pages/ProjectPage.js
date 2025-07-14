@@ -4,25 +4,27 @@ import styled from 'styled-components';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
 // --- IMPORTS ---
-import { projects } from '../data/projects'; 
+import { projects } from '../data/projects';
 import Typewriter from '../components/Typewriter';
 import HoverAnimatedText from '../components/HoverAnimatedText';
 import CyclingImage from '../components/CyclingImage';
+import OptimizedVideo from '../components/OptimizedVideo';
 
 // --- STYLED COMPONENTS ---
 const ProjectContainer = styled.div`
-  padding: 6rem 3rem 4rem;
-  max-width: 1400px;
+  padding: 6rem 2rem 4rem;
+  width: 100%;
   margin: 0 auto;
   min-height: 100vh;
   overflow-x: hidden;
+  
   @media (max-width: 768px) {
-    padding: 5rem 1.5rem 3rem;
+    padding: 5rem 1rem 3rem;
   }
 `;
 
 const ContentWrapper = styled.div`
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
 `;
 
@@ -79,12 +81,16 @@ const MetaItem = styled.span`
 
 const HeroImageContainer = styled.div`
   width: 100%;
-  height: 80vh;
+  height: 85vh;
   border-radius: 20px;
   overflow: hidden;
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
   position: relative;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  
+  @media (max-width: 768px) {
+    height: 70vh;
+  }
 `;
 
 const HeroImage = styled(motion.div)`
@@ -111,7 +117,7 @@ const ProjectDescription = styled.p`
   margin-bottom: 3rem;
   color: ${({ theme }) => theme.colors.secondary};
   opacity: 0.85;
-  max-width: 960px;
+  max-width: 1200px;
 `;
 
 const ProjectDetails = styled.div`
@@ -120,7 +126,8 @@ const ProjectDetails = styled.div`
   color: ${({ theme }) => theme.colors.secondary};
   opacity: 0.85;
   margin-bottom: 4rem;
-  max-width: 960px;
+  max-width: 1200px;
+  
   b {
     font-weight: 600;
     opacity: 1;
@@ -134,31 +141,24 @@ const ProjectDetails = styled.div`
 const ImageGrid = styled.div`
   display: grid;
   gap: 2rem;
-  margin: 3rem 0 4rem;
+  margin: 8rem 0 4rem;
   grid-template-columns: ${({ $columns }) =>
     $columns ? `repeat(${$columns}, 1fr)` : 'repeat(auto-fit, minmax(300px, 1fr))'};
   @media (max-width: 768px) {
     grid-template-columns: ${({ $columns }) => $columns ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))'};
     gap: 1.5rem;
+    margin: 6rem 0 3rem;
   }
 `;
 
 const WideImageGrid = styled(ImageGrid)`
-  transform: scale(1.08);
-
-  &:hover {
-    transform: scale(1.07);
-  }
+  gap: 2.5rem;
   
   @media (max-width: 768px) {
-    transform: scale(1);
-     &:hover {
-      transform: scale(1);
-    }
+    gap: 1.5rem;
   }
 `;
 
-// UPDATED: Better image container solution
 const ProjectImage = styled(motion.div)`
   border-radius: 24px;
   overflow: hidden;
@@ -167,23 +167,19 @@ const ProjectImage = styled(motion.div)`
   position: relative;
   background-color: transparent;
   
-  /* If aspect ratio is specified, use it */
   ${({ $aspectRatio }) => $aspectRatio && $aspectRatio !== 'auto' && `
     aspect-ratio: ${$aspectRatio};
   `}
 
-  /* For auto aspect ratio, let image determine height */
   ${({ $aspectRatio }) => (!$aspectRatio || $aspectRatio === 'auto') && `
     img {
       width: 100%;
       height: auto;
       display: block;
-            object-fit: fill;
-
+      object-fit: fill;
     }
   `}
 
-  /* For fixed aspect ratio, position image absolutely */
   ${({ $aspectRatio }) => $aspectRatio && $aspectRatio !== 'auto' && `
     img {
       position: absolute;
@@ -201,10 +197,9 @@ const ProjectImage = styled(motion.div)`
   }
 `;
 
-// ✨ START: NEW COMPONENTS FOR TRANSPARENT IMAGES
 const FloatingImageGrid = styled(motion.div)`
   display: grid;
-  gap: 1rem; /* Smaller gap for these images */
+  gap: 0.5rem;
   margin: 2rem 0;
 `;
 
@@ -214,17 +209,32 @@ const FloatingImage = styled.div`
     height: auto;
   }
 `;
-// ✨ END: NEW COMPONENTS FOR TRANSPARENT IMAGES
-
 
 const MediaRow = styled.div`
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   overflow-x: auto;
-  padding: 0 4px 1rem;
-  &::-webkit-scrollbar { display: none; }
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  padding: 0 0 1.5rem;
+  
+  &::-webkit-scrollbar { 
+    height: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.colors.border};
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.secondary};
+    border-radius: 3px;
+    opacity: 0.5;
+  }
+  
+  @media (max-width: 768px) {
+    gap: 0.8rem;
+    padding: 0 0 1rem;
+  }
 `;
 
 const MediaItemContainer = styled(motion.div)`
@@ -234,25 +244,58 @@ const MediaItemContainer = styled(motion.div)`
   gap: 0.75rem;
 `;
 
-// UPDATED: Fixed media image wrapper
 const MediaImageWrapper = styled.div`
-  height: 55vh;
-  border-radius: 24px;
+  ${({ $aspectRatio }) => {
+    if ($aspectRatio === '4:5') {
+      return `
+        aspect-ratio: 4 / 5;
+        width: 450px;
+        height: auto;
+      `;
+    }
+    // Default for mobile/phone screenshot style images (like Chupa Chups)
+    return `
+      height: 65vh;
+      width: auto;
+      max-width: 420px;
+      flex-shrink: 0;
+    `;
+  }}
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   background-color: transparent;
-
+  
   &:hover {
-    transform: scale(0.99);
+    transform: scale(0.98);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
   }
-
+  
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
+  }
+  
+  @media (max-width: 768px) {
+    ${({ $aspectRatio }) => {
+      if ($aspectRatio === '4:5') {
+        return `
+          aspect-ratio: 4 / 5;
+          width: 320px;
+          height: auto;
+        `;
+      }
+      return `
+        height: 50vh;
+        width: auto;
+        max-width: 280px;
+        flex-shrink: 0;
+      `;
+    }}
   }
 `;
 
@@ -270,9 +313,13 @@ const Caption = styled.p`
 const MainVideoContainer = styled(motion.div)`
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-  margin: 4rem 0;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  margin: 5rem 0;
   position: relative;
+  
+  @media (max-width: 768px) {
+    margin: 3rem 0;
+  }
   
   video {
     width: 100%;
@@ -284,19 +331,17 @@ const MainVideoContainer = styled(motion.div)`
 const VideoGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(${({ $columns }) => $columns}, 1fr);
-  gap: 1.5rem;
+  gap: 0.8rem;
   margin: 3rem 0 4rem;
   @media (max-width: 968px) {
     grid-template-columns: 1fr;
   }
 `;
 
-// UPDATED: Fixed video container
 const VideoContainer = styled(motion.div)`
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  aspect-ratio: ${({ $aspectRatio }) => $aspectRatio || '16 / 9'};
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   background-color: transparent;
@@ -305,14 +350,28 @@ const VideoContainer = styled(motion.div)`
     transform: scale(0.99);
   }
 
-  video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  /* If a fixed aspect ratio is specified, use it and position video absolutely */
+  ${({ $aspectRatio }) => $aspectRatio && $aspectRatio !== 'auto' && `
+    aspect-ratio: ${$aspectRatio};
+
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  `}
+
+  /* For 'auto' aspect ratio, let the video determine the height naturally */
+  ${({ $aspectRatio }) => (!$aspectRatio || $aspectRatio === 'auto') && `
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  `}
 `;
 
 const NavigationLinks = styled.div`
@@ -349,7 +408,6 @@ const ParallaxWrapper = ({ children, speed = -1, type = 'default' }) => {
       offset: ['start end', 'end start'],
     });
 
-    // Disable parallax for headings and certain content types to prevent overlapping
     const shouldDisableParallax = type === 'heading' || type === 'overview';
     const effectiveSpeed = shouldDisableParallax ? 0 : speed;
 
@@ -385,7 +443,6 @@ const ContentRenderer = ({ content }) => {
                     </motion.div>
                   );
                 
-                // ✨ ADD NEW CASE FOR TRANSPARENT IMAGES
                 case 'floatingImageGrid':
                   return (
                     <FloatingImageGrid {...motionProps}>
@@ -421,7 +478,7 @@ const ContentRenderer = ({ content }) => {
                         <MediaRow>
                         {block.items.map((item, i) => (
                             <MediaItemContainer key={i}>
-                                <MediaImageWrapper>
+                                <MediaImageWrapper $aspectRatio={item.aspectRatio}>
                                     <img src={item.url} alt={item.caption || `Adaptation ${i + 1}`} />
                                 </MediaImageWrapper>
                                 {item.caption && <Caption>{item.caption}</Caption>}
@@ -456,7 +513,11 @@ const ContentRenderer = ({ content }) => {
                 case 'mainVideo':
                     return (
                     <MainVideoContainer {...motionProps}>
-                        <video src={block.videoUrl} controls autoPlay muted loop />
+                        <OptimizedVideo 
+                          src={block.videoUrl}
+                          showControls={true}
+                          autoPlay={false}
+                        />
                     </MainVideoContainer>
                     );
 
@@ -472,7 +533,7 @@ const ContentRenderer = ({ content }) => {
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.6, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] }}
                         >
-                            <img src={imgSrc} alt={`Project gallery image ${i + 1}`} />
+                            <img src={imgSrc} alt={`Project gallery ${i + 1}`} />
                         </ProjectImage>
                         ))}
                     </ImageGrid>
@@ -490,7 +551,10 @@ const ContentRenderer = ({ content }) => {
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.6, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] }}
                         >
-                            <video src={videoSrc} autoPlay loop muted playsInline />
+                            <OptimizedVideo 
+                              src={videoSrc} 
+                              aspectRatio={block.aspectRatio || '16 / 9'}
+                            />
                         </VideoContainer>
                         ))}
                     </VideoGrid>

@@ -6,24 +6,24 @@ import HoverAnimatedText from './HoverAnimatedText'; // Import the new component
 // ... (Keep styled-components the same) ...
 const FooterContainer = styled.footer`
   width: 100%;
-  padding: 2.5rem 3rem; /* Reduced padding */
+  padding: 2.5rem 3rem;
   background: ${({ theme }) => theme.colors.primary};
   border-top: 1px solid ${({ theme }) => theme.colors.border};
   margin-top: 8rem;
 
   @media (max-width: 768px) {
-    padding: 3rem 1.5rem;
+    padding: 3rem 1rem;
     margin-top: 6rem;
   }
 `;
 
 const FooterContent = styled.div`
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1.5rem; /* Gap between all items */
+  gap: 1.5rem;
   
   @media (max-width: 1024px) {
     flex-direction: column;
