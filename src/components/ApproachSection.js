@@ -4,42 +4,39 @@ import styled from 'styled-components';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 
 const approachData = [
-    {
-        number: '01',
-        title: 'Embrace Complexity',
-        description: 'I navigate intricate design challenges with care, crafting solutions that are both innovative and adaptable to a rapidly evolving world.',
-    },
-    {
-        number: '02',
-        title: 'Insights Before Ideation',
-        description: 'I begin every engagement with a deep understanding of your users and goals, letting insights shape ideas that connect and push business forward.',
-    },
-    {
-        number: '03',
-        title: 'Partners, Not Hired Hands',
-        description: 'I integrate with your team as a true partner, fostering collaboration and shared ownership to achieve the best possible outcomes together.',
-    },
-    {
-        number: '04',
-        title: 'Beauty with Purpose',
-        description: 'I craft visually stunning designs that serve a strategic intent, merging aesthetic excellence with functional impact.',
-    },
+  {
+    number: '01',
+    title: 'Creative Process & Tool Design',
+    description: 'I design systems that support ideation, prototyping, and creative workflows — from real-time visual tools to modular setups that extend and streamline the design process itself.'
+  },
+  {
+    number: '02',
+    title: 'Web & Interactive Experiences',
+    description: 'I develop interfaces and digital ecosystems that connect content, interaction, and identity — from experimental platforms to responsive, content-driven websites.'
+  },
+  {
+    number: '03',
+    title: 'Spatial & Immersive Design',
+    description: 'I create experiences that inhabit physical space — combining sound, motion, light, and interaction in installations, performances, and hybrid formats.'
+  },
+  {
+    number: '04',
+    title: 'Audiovisual & Motion Design',
+    description: 'I craft visual narratives that move — through animation, motion graphics, and dynamic media for screens, projections, and digital communication.'
+  },
+  {
+    number: '05',
+    title: 'Experience & System Design',
+    description: 'I approach every project as an interconnected system — thinking across formats and designing for coherence, adaptability, and continuity over time.'
+  },
+  {
+    number: '06',
+    title: 'Research & Narrative Strategy',
+    description: 'I combine design with research, archival practices, and storytelling — building formats that give shape to memory, emotion, and cultural meaning.'
+  }
 ];
 
 // --- STYLED COMPONENTS ---
-
-// *** MODIFIED ***: Removed the self-contained :hover state.
-const ItemTitle = styled(motion.h3).attrs({
-    className: 'item-title-trigger'
-})`
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.secondary};
-  margin: 0;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  letter-spacing: -0.02em;
-  cursor: pointer;
-`;
 
 const SectionContainer = styled(motion.section)`
   padding: 8rem 3rem;
@@ -60,19 +57,21 @@ const SectionHeader = styled(motion.div)`
   margin-bottom: 4rem;
   
   span {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: ${({ theme }) => theme.colors.secondary};
-    opacity: 0.7;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
   }
   
   &::before {
     content: '';
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: ${({ theme }) => theme.colors.secondary};
-    opacity: 0.7;
-    transition: all 0.3s ease;
+    opacity: 0.6;
   }
 `;
 
@@ -81,7 +80,6 @@ const ApproachList = styled.div`
   flex-direction: column;
 `;
 
-// *** MODIFIED ***: All hover logic is now centralized here.
 const ItemContainer = styled(motion.div)`
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   position: relative;
@@ -89,73 +87,41 @@ const ItemContainer = styled(motion.div)`
   &:last-child {
     border-bottom: none;
   }
-  
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -1px;
-    width: 0;
-    height: 1px;
-    background: ${({ theme }) => theme.colors.secondary};
-    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
-  }
-  
-  /* This is the new, centralized hover logic */
-  /* When the title is hovered... */
-  &:has(.item-title-trigger:hover) {
-    
-    /* 1. Animate the underline */
-    &::before {
-      width: 100%;
-    }
-
-    /* 2. Animate the title */
-    .item-title-trigger {
-      transform: translateX(10px);
-    }
-
-    /* 3. Animate the number */
-    .item-number-trigger {
-      transform: translateX(10px);
-    }
-    
-    /* 4. Animate the description's opacity */
-    .item-description-trigger {
-      opacity: 0.95;
-    }
-  }
 `;
 
 const ItemGrid = styled.div`
   display: grid;
-  grid-template-columns: 80px 1fr;
+  grid-template-columns: 60px 1fr;
   gap: 2rem;
   align-items: baseline;
-  padding: 3rem 0;
+  padding: 2.5rem 0;
 
   @media (max-width: 768px) {
     gap: 1.5rem;
-    padding: 2.5rem 0;
-    grid-template-columns: 60px 1fr;
+    padding: 2rem 0;
+    grid-template-columns: 50px 1fr;
   }
 `;
 
-// *** MODIFIED ***: Added a class and removed hover logic.
-const ItemNumber = styled(motion.span).attrs({
-    className: 'item-number-trigger'
-})`
-  font-size: 1.2rem;
+const ItemNumber = styled(motion.span)`
+  font-size: 0.85rem;
   color: ${({ theme }) => theme.colors.secondary};
-  font-weight: 400; /* Replaced theme reference for clarity */
-  font-style: italic; /* Replaced theme reference for clarity */
-  padding-top: 0.5rem;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.5;
+  font-weight: 500;
+  padding-top: 0.25rem;
 `;
 
 const ItemContent = styled.div`
   overflow: hidden;
+`;
+
+const ItemTitle = styled(motion.h3)`
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.secondary};
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 `;
 
 const DescriptionWrapper = styled(motion.div)`
@@ -163,17 +129,13 @@ const DescriptionWrapper = styled(motion.div)`
   position: relative;
 `;
 
-// *** MODIFIED ***: Added a class and removed hover logic.
-const ItemDescription = styled.p.attrs({
-    className: 'item-description-trigger'
-})`
-  font-size: 1.1rem;
-  line-height: 1.7;
+const ItemDescription = styled.p`
+  font-size: 1rem;
+  line-height: 1.6;
   color: ${({ theme }) => theme.colors.secondary};
-  opacity: 0.8;
-  max-width: 600px;
-  margin-top: 1.5rem;
-  transition: opacity 0.3s ease;
+  opacity: 0.7;
+  max-width: 720px;
+  margin: 0;
 `;
 
 const ProgressBar = styled(motion.div)`
@@ -181,12 +143,11 @@ const ProgressBar = styled(motion.div)`
   right: 2rem;
   top: 50%;
   transform: translateY(-50%);
-  width: 60px;
-  height: 2px;
+  width: 48px;
+  height: 1px;
   background: ${({ theme }) => theme.colors.border};
   border-radius: 1px;
   overflow: hidden;
-  pointer-events: none;
   
   @media (max-width: 768px) {
     display: none;
@@ -199,10 +160,11 @@ const ProgressFill = styled(motion.div)`
   top: 0;
   height: 100%;
   background: ${({ theme }) => theme.colors.secondary};
+  opacity: 0.6;
   transform-origin: left;
 `;
 
-// --- APPROACH ITEM COMPONENT (No changes needed here) ---
+// --- APPROACH ITEM COMPONENT ---
 
 const ApproachItem = ({ number, title, description, index }) => {
   const ref = useRef(null);
@@ -220,7 +182,7 @@ const ApproachItem = ({ number, title, description, index }) => {
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
       animate={itemInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.4, 0, 0.2, 1] }}
     >
       <ItemGrid>
         <ItemNumber>({number})</ItemNumber>
@@ -269,7 +231,7 @@ const ApproachItem = ({ number, title, description, index }) => {
   );
 };
 
-// --- MAIN SECTION COMPONENT (No changes needed here) ---
+// --- MAIN SECTION COMPONENT ---
 
 const ApproachSection = forwardRef((props, ref) => {
   const headerRef = useRef(null);
@@ -288,7 +250,7 @@ const ApproachSection = forwardRef((props, ref) => {
         animate={headerInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
         transition={{ duration: 0.6 }}
       >
-                  <span>About Me</span>
+        <span>Areas of Practice</span>
       </SectionHeader>
       <ApproachList>
         {approachData.map((item, index) => (

@@ -18,11 +18,11 @@ export const projects = [
       },
       {
         type: 'heading',
-        text: 'Concept — "More Than Just Objects"'
+        text: 'Concept &mdash; "More Than Just Objects"'
       },
       {
         type: 'details',
-        text: 'This spot reimagines eBay as more than a marketplace — as a <b>dynamic space where people, passions, and stories connect</b> through the objects they choose to exchange.<br/><br/>Inspired by the <b>emotional value</b> behind everyday items, the concept blends real, spontaneous moments with elements of eBay’s user interface, creating a narrative <b>cyberspace</b> that is both human and digital. Each object becomes a starting point — a spark for new stories, new choices, new connections.<br/><br/>The tone balances personal storytelling with the reliability and variety that define eBay. It positions buying or selling not as a transaction, but as a <b>meaningful handoff</b> between lives.<br/>Designed as a <b>modular format</b>, the spot can adapt to multiple products and voices, with key phrases that turn each item into an experience.<br/><br/><b>An open narrative</b> — always ready to welcome new objects, new stories, and new protagonists.'
+        text: 'This spot reimagines eBay as more than a marketplace &mdash; as a <b>dynamic space where people, passions, and stories connect</b> through the objects they choose to exchange.<br/><br/>Inspired by the <b>emotional value</b> behind everyday items, the concept blends real, spontaneous moments with elements of eBay&rsquo;s user interface, creating a narrative <b>cyberspace</b> that is both human and digital. Each object becomes a starting point &mdash; a spark for new stories, new choices, new connections.<br/><br/>The tone balances personal storytelling with the reliability and variety that define eBay. It positions buying or selling not as a transaction, but as a <b>meaningful handoff</b> between lives.<br/>Designed as a <b>modular format</b>, the spot can adapt to multiple products and voices, with key phrases that turn each item into an experience.<br/><br/><b>An open narrative</b> &mdash; always ready to welcome new objects, new stories, and new protagonists.'
       },
       {
         type: 'imageGrid',
@@ -41,7 +41,7 @@ export const projects = [
       },
       {
         type: 'details',
-        text: 'The concept was extended across <b>multiple touchpoints</b>. In addition to the main spot, the campaign was adapted for social media posts, a vertical reel format, and out-of-home posters. Each adaptation works as a standalone "pill" — spotlighting a single object or encapsulating the essence of the campaign in a concise, impactful format.',
+        text: 'The concept was extended across <b>multiple touchpoints</b>. In addition to the main spot, the campaign was adapted for social media posts, a vertical reel format, and out-of-home posters. Each adaptation works as a standalone "pill" &mdash; spotlighting a single object or encapsulating the essence of the campaign in a concise, impactful format.',
       },
       {
         type: 'mediaRow',
@@ -71,7 +71,7 @@ export const projects = [
       },
       {
         type: 'details',
-        text: 'The spot uses two types of scrolling to reflect eBay’s richness:<br/><br/><b>Vertical scrolling</b> mirrors the natural app experience, emphasizing the breadth and variety of products.<br/><b>Horizontal scrolling</b> shifts the focus to people and stories, using a more narrative and cinematic approach to highlight the human side of the platform.<br/><br/>This dual structure balances <b>product exploration with emotional storytelling</b>.'
+        text: 'The spot uses two types of scrolling to reflect eBay&rsquo;s richness:<br/><br/><b>Vertical scrolling</b> mirrors the natural app experience, emphasizing the breadth and variety of products.<br/><b>Horizontal scrolling</b> shifts the focus to people and stories, using a more narrative and cinematic approach to highlight the human side of the platform.<br/><br/>This dual structure balances <b>product exploration with emotional storytelling</b>.'
       },
       {
         type: 'videoGrid',
@@ -114,7 +114,7 @@ export const projects = [
       },
       {
         type: 'overview',
-        text: 'A full strategic and creative campaign to reposition Chupa Chups for a younger digital audience. From research and brand analysis to the design of a cross-platform communication system, Sweet Escape reframes the brand as a bold, guilty pleasure — one that’s earned, not given.<br/><br/>The project included: brand research, creative concept development, digital experience design, gamification, physical activations, and a social-first content strategy.'
+        text: 'A full strategic and creative campaign to reposition Chupa Chups for a younger digital audience. From research and brand analysis to the design of a cross-platform communication system, Sweet Escape reframes the brand as a bold, guilty pleasure &mdash; one that&rsquo;s earned, not given.<br/><br/>The project included: brand research, creative concept development, digital experience design, gamification, physical activations, and a social-first content strategy.'
       },
       {
         type: 'imageGrid',
@@ -133,7 +133,7 @@ export const projects = [
       },
       {
         type: 'details',
-        text: 'Chupa Chups isn’t just a lollipop — it’s a guilty pleasure to be conquered. Famously hard to unwrap, it becomes a playful metaphor for temptation and reward.<br/><br/>Like a modern forbidden fruit, it hides a sweetness that must be earned: its stubborn wrapper turns into a daily challenge, a small ritual of patience, desire, and just the right amount of frustration.<br/><br/><i>"Only the bold reach the center of pleasure."</i><br/><br/>Unwrapping a Chupa Chups becomes an irresistible urge — an instinctive, almost rebellious act to conquer something small, sweet, and slightly forbidden.<br/><br/><b>The goal:</b> To reposition the brand as a symbol of small daily transgressions — transforming the simple act of opening a lollipop into a moment of joy, irony, and emotional gratification.'
+        text: 'Chupa Chups isn&rsquo;t just a lollipop &mdash; it&rsquo;s a guilty pleasure to be conquered. Famously hard to unwrap, it becomes a playful metaphor for temptation and reward.<br/><br/>Like a modern forbidden fruit, it hides a sweetness that must be earned: its stubborn wrapper turns into a daily challenge, a small ritual of patience, desire, and just the right amount of frustration.<br/><br/><i>"Only the bold reach the center of pleasure."</i><br/><br/>Unwrapping a Chupa Chups becomes an irresistible urge &mdash; an instinctive, almost rebellious act to conquer something small, sweet, and slightly forbidden.<br/><br/><b>The goal:</b> To reposition the brand as a symbol of small daily transgressions &mdash; transforming the simple act of opening a lollipop into a moment of joy, irony, and emotional gratification.'
       },
       {
         type: 'imageGrid',
@@ -147,7 +147,7 @@ export const projects = [
       },
       {
         type: 'details',
-        text: "The Sweet Escape experience unfolded across digital and physical spaces — blending street, social, and interactive content into a cohesive engagement flow.<br/><br/><b>Entry Points</b><br/>QR posters, social teasers, and a branded Mini Truck activated the journey in physical and digital environments.<br/><br/><b>Challenges</b><br/>Users could take on mini social challenges or short mobile games — playful actions that tested their creativity and determination.<br/><br/><b>Landing Page</b><br/>After completing a challenge, participants were directed to a landing page to claim small rewards and get early access info about the final event.<br/><br/><b>Final Event</b><br/>The journey culminated in a live pop-up event with music, visuals, and on-site challenges. Special guest: Anna Pepe, bringing energy and hype to the Sweet Escape finale.<br/><br/><b>Sweet Victory</b><br/>Final rewards were unlocked based on overall participation — rewarding consistency and engagement across the entire experience."
+        text: "The Sweet Escape experience unfolded across digital and physical spaces &mdash; blending street, social, and interactive content into a cohesive engagement flow.<br/><br/><b>Entry Points</b><br/>QR posters, social teasers, and a branded Mini Truck activated the journey in physical and digital environments.<br/><br/><b>Challenges</b><br/>Users could take on mini social challenges or short mobile games &mdash; playful actions that tested their creativity and determination.<br/><br/><b>Landing Page</b><br/>After completing a challenge, participants were directed to a landing page to claim small rewards and get early access info about the final event.<br/><br/><b>Final Event</b><br/>The journey culminated in a live pop-up event with music, visuals, and on-site challenges. Special guest: Anna Pepe, bringing energy and hype to the Sweet Escape finale.<br/><br/><b>Sweet Victory</b><br/>Final rewards were unlocked based on overall participation &mdash; rewarding consistency and engagement across the entire experience."
       },
        {
         type: 'imageGrid',
@@ -161,7 +161,7 @@ export const projects = [
       },
       {
         type: 'details',
-        text: 'Users were invited to join via IG Stories and TikTok challenges, tagging @chupachups_it and using #SweetEscapeChallenge.<br/><br/>The tone was personal, playful, and full of guilty pleasure energy — from rebellious captions to unwrapping rituals.'
+        text: 'Users were invited to join via IG Stories and TikTok challenges, tagging @chupachups_it and using #SweetEscapeChallenge.<br/><br/>The tone was personal, playful, and full of guilty pleasure energy &mdash; from rebellious captions to unwrapping rituals.'
       },
       {
         type: 'mediaRow',
@@ -187,7 +187,7 @@ export const projects = [
       },
       {
         type: 'details',
-        text: 'In true Chupa Chups fashion, fun came first.<br/><br/>Participants could play simple, fast-paced games (inspired by match-3 and tap challenges) to earn access to rewards — because sometimes, pleasure really is something you have to fight for.'
+        text: 'In true Chupa Chups fashion, fun came first.<br/><br/>Participants could play simple, fast-paced games (inspired by match-3 and tap challenges) to earn access to rewards &mdash; because sometimes, pleasure really is something you have to fight for.'
       },
       {
         type: 'heading',
@@ -195,13 +195,13 @@ export const projects = [
       },
       {
         type: 'details',
-        text: '<i>Only the bold reach the center.</i><br/><i>A guilty pleasure you have to earn.</i><br/><i>Unwrap. Play. Win. Repeat.</i><br/><i>Pleasure tastes better when it’s conquered.</i><br/><i>Small rebellion. Sweet reward.</i>'
+        text: '<i>Only the bold reach the center.</i><br/><i>A guilty pleasure you have to earn.</i><br/><i>Unwrap. Play. Win. Repeat.</i><br/><i>Pleasure tastes better when it&rsquo;s conquered.</i><br/><i>Small rebellion. Sweet reward.</i>'
       },
     ]
   },
   {
     id: 'netflix-lounge',
-    title: 'Netflix Lounge — Social Streaming',
+    title: 'Netflix Lounge &mdash; Social Streaming',
     categories: ['UX/UI', 'Creative Strategy', 'Branding'],
     year: '2023',
     images: {
@@ -218,7 +218,7 @@ export const projects = [
       },
       {
         type: 'details',
-        text: 'Despite its leadership in streaming, Netflix faces growing challenges in retaining users, who often feel overwhelmed by choice, disconnected from recommendations, and limited in how they organize or share content.<br/><br/>Netflix Lounge responds to this by introducing a social layer within the platform — allowing users to create and share watchlists, discover content through friends, co-watch with others, and personalize their profiles. The goal: to transform Netflix into a space of connection as well as consumption.'
+        text: 'Despite its leadership in streaming, Netflix faces growing challenges in retaining users, who often feel overwhelmed by choice, disconnected from recommendations, and limited in how they organize or share content.<br/><br/>Netflix Lounge responds to this by introducing a social layer within the platform &mdash; allowing users to create and share watchlists, discover content through friends, co-watch with others, and personalize their profiles. The goal: to transform Netflix into a space of connection as well as consumption.'
       },
       {
         type: 'cyclingImage',
@@ -276,19 +276,19 @@ export const projects = [
         columns: 2,
         aspectRatio: '16/9',
         images: [
-          '/projects/netflix/ui1.png',
-          '/projects/netflix/ui2.png',
-          '/projects/netflix/ui3.png',
-          '/projects/netflix/ui4.png',
+          '/projects/netflix/keyfeature1.png',
+          '/projects/netflix/keyfeature2.png',
+          '/projects/netflix/refresh1.png',
+          '/projects/netflix/refresh2.png',
         ]
       },
       {
         type: 'heading',
-        text: 'Physical Communication — Netflix Lounge Pass'
+        text: 'Physical Communication &mdash; Netflix Lounge Pass'
       },
       {
         type: 'details',
-        text: 'To support the campaign launch, a printed format inspired by cinema tickets was designed.<br/><br/>This tactile element acts as a teaser — blending Netflix’s tone of voice with guerrilla-style communication and a clear call-to-action via QR code. It connects the digital and physical, sparking curiosity and reinforcing the concept of Netflix as a shared space.'
+        text: 'To support the campaign launch, a printed format inspired by cinema tickets was designed.<br/><br/>This tactile element acts as a teaser &mdash; blending Netflix&rsquo;s tone of voice with guerrilla-style communication and a clear call-to-action via QR code. It connects the digital and physical, sparking curiosity and reinforcing the concept of Netflix as a shared space.'
       },
       {
         type: 'imageGrid',
@@ -304,7 +304,7 @@ export const projects = [
       },
       {
         type: 'details',
-        text: 'A set of teaser posts was designed to support a soft launch of Netflix Lounge. Each post showcases a different Netflix title, paired with a personal-style “review” — short, emotional, and authentic, as if written by a friend.<br/><br/>The goal is to spark curiosity and highlight the new social dynamic of the platform, without announcing it overtly. These posts were designed to match Netflix’s visual tone, using familiar series visuals combined with micro-stories that reflect connection, emotion, and shared taste.'
+        text: 'A set of teaser posts was designed to support a soft launch of Netflix Lounge. Each post showcases a different Netflix title, paired with a personal-style "review" &mdash; short, emotional, and authentic, as if written by a friend.<br/><br/>The goal is to spark curiosity and highlight the new social dynamic of the platform, without announcing it overtly. These posts were designed to match Netflix&rsquo;s visual tone, using familiar series visuals combined with micro-stories that reflect connection, emotion, and shared taste.'
       },
       {
         type: 'imageGrid',

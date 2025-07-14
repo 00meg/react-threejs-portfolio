@@ -8,12 +8,12 @@ const aboutData = [
   {
     number: '01',
     title: 'I start by understanding.',
-    description: 'Good design begins with context. I take time to understand the people, the space, and the system I’m designing for — asking questions, mapping needs, and listening before I act.',
+    description: 'Good design begins with context. I take time to understand the people, the space, and the system I\'m designing for — asking questions, mapping needs, and listening before I act.',
   },
   {
     number: '02',
     title: 'I think in systems.',
-    description: 'I don’t just design screens or visuals — I think about how everything fits together. Whether it\'s a product, an installation, or a toolkit, I aim for experiences that are coherent, flexible, and future-friendly.',
+    description: 'I don\'t just design screens or visuals — I think about how everything fits together. Whether it\'s a product, an installation, or a toolkit, I aim for experiences that are coherent, flexible, and future-friendly.',
   },
   {
     number: '03',
@@ -43,15 +43,15 @@ const imageData = [
     src: '/mee.png',
     alt: 'A portrait of Meg',
     z: 1,
-    rotate: -8, // Reduced rotation
+    rotate: -8,
     x: '-45%',
-    y: '-25%',  // Moved slightly more towards the bottom (less negative)
+    y: '-25%',
   },
   {
     src: '/me1.jpg',
     alt: 'Meg working on a project',
     z: 2,
-    rotate: 5, // Reduced rotation
+    rotate: 5,
     x: '35%',
     y: '0%',
   },
@@ -59,12 +59,11 @@ const imageData = [
     src: '/me2.jpg',
     alt: 'A candid shot of Meg',
     z: 0,
-    rotate: 10, // Reduced rotation
+    rotate: 10,
     x: '-15%',
     y: '50%',
   },
 ];
-
 
 // --- STYLED COMPONENTS ---
 
@@ -80,7 +79,7 @@ const HeroSection = styled.section`
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   align-items: center;
-  gap: 2rem;
+  gap: 4rem;
   padding: 0 3rem;
   max-width: 1400px;
   margin: 0 auto;
@@ -91,6 +90,7 @@ const HeroSection = styled.section`
     min-height: 0;
     padding: 15vh 1.5rem 8vh;
     text-align: center;
+    gap: 2rem;
   }
 
   @media (max-width: 768px) {
@@ -107,52 +107,67 @@ const HeroContent = styled(motion.div)`
 `;
 
 const Title = styled(motion.h1)`
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
-  margin: 0 0 2rem 0;
+  margin: 0 0 3rem 0;
   letter-spacing: -0.03em;
   line-height: 1;
 
   @media (max-width: 968px) {
-    font-size: clamp(3rem, 10vw, 5rem);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    margin-bottom: 2.5rem;
   }
 `;
 
+const TextGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 600px;
+`;
+
 const IntroText = styled(motion.p)`
-  font-size: 1rem;
-  line-height: 1.7;
+  font-size: 1.05rem;
+  line-height: 1.75;
   font-weight: 400;
   color: ${({ theme }) => theme.colors.secondary};
-  max-width: 550px;
-  opacity: 0.9;
-  margin-bottom: 1.5rem;
-
-  &:last-of-type {
-    margin-bottom: 0;
+  opacity: 0.85;
+  margin: 0;
+  
+  &:first-child {
+    font-size: 1.15rem;
+    font-weight: 500;
+    opacity: 0.95;
+    line-height: 1.6;
   }
   
   @media (max-width: 968px) {
     margin-left: auto;
     margin-right: auto;
+    text-align: left;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    
+    &:first-child {
+      font-size: 1.1rem;
+    }
   }
 `;
 
 const ImageStackContainer = styled(motion.div)`
   position: relative;
-  width: clamp(280px, 30vw, 400px);
-  height: calc(clamp(280px, 30vw, 400px) * 1.25);
+  width: clamp(280px, 30vw, 380px);
+  height: calc(clamp(280px, 30vw, 380px) * 1.25);
   justify-self: center;
   align-self: center;
-  margin-top: -5vh; 
-  margin-bottom: 0; 
   
   @media (max-width: 968px) {
     order: 1;
-    margin-bottom: 3rem;
-    margin-top: 0;
-    align-self: center;
-    height: calc(clamp(280px, 70vw, 320px) * 1.25);
-    width: clamp(280px, 70vw, 320px);
+    margin-bottom: 2rem;
+    height: calc(clamp(260px, 60vw, 320px) * 1.25);
+    width: clamp(260px, 60vw, 320px);
   }
 `;
 
@@ -162,29 +177,39 @@ const StackedImage = styled(motion.div)`
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
   background: ${({ theme }) => theme.colors.border};
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  transition: box-shadow 0.4s ease;
   
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: brightness(0.95);
+    transition: filter 0.4s ease;
+  }
+  
+  &:hover {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    
+    img {
+      filter: brightness(1);
+    }
   }
 `;
-
 
 // --- MY APPROACH SECTION STYLES ---
 
 const MyApproachSection = styled(motion.section)`
-  padding: 8rem 3rem;
+  padding: 8rem 3rem 10rem;
   max-width: 1400px;
   margin: 0 auto;
   
   @media (max-width: 768px) {
-    padding: 6rem 1.5rem;
+    padding: 6rem 1.5rem 8rem;
   }
 `;
 
@@ -195,40 +220,27 @@ const SectionHeader = styled(motion.div)`
   margin-bottom: 4rem;
   
   span {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: ${({ theme }) => theme.colors.secondary};
-    opacity: 0.7;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
   }
   
   &::before {
     content: '';
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: ${({ theme }) => theme.colors.secondary};
-    opacity: 0.7;
+    opacity: 0.6;
   }
 `;
 
 const ApproachList = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const ItemTitle = styled(motion.h3).attrs({
-  className: 'approach-title-trigger'
-})`
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.secondary};
-  margin: 0;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  letter-spacing: -0.02em;
-  cursor: pointer;
-  
-  &:hover {
-    transform: translateX(10px);
-  }
 `;
 
 const ItemContainer = styled(motion.div)`
@@ -238,91 +250,131 @@ const ItemContainer = styled(motion.div)`
   &:last-child {
     border-bottom: none;
   }
-  
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -1px;
-    width: 0;
-    height: 1px;
-    background: ${({ theme }) => theme.colors.secondary};
-    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  &:has(.approach-title-trigger:hover)::before {
-    width: 100%;
-  }
 `;
 
 const ItemGrid = styled.div`
   display: grid;
-  grid-template-columns: 80px 1fr;
+  grid-template-columns: 60px 1fr;
   gap: 2rem;
   align-items: baseline;
-  padding: 3rem 0;
+  padding: 2.5rem 0;
 
   @media (max-width: 768px) {
     gap: 1.5rem;
-    padding: 2.5rem 0;
-    grid-template-columns: 60px 1fr;
+    padding: 2rem 0;
+    grid-template-columns: 50px 1fr;
   }
 `;
 
 const ItemNumber = styled(motion.span)`
-  font-size: 1.2rem;
+  font-size: 0.85rem;
   color: ${({ theme }) => theme.colors.secondary};
-  font-style: italic;
-  padding-top: 0.5rem;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  ${ItemContainer}:has(.approach-title-trigger:hover) & {
-    transform: translateX(10px);
-  }
+  opacity: 0.5;
+  font-weight: 500;
+  padding-top: 0.25rem;
 `;
 
 const ItemContent = styled.div`
   overflow: hidden;
 `;
 
+const ItemTitle = styled(motion.h3)`
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.secondary};
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+`;
+
 const DescriptionWrapper = styled(motion.div)`
   overflow: hidden;
+  position: relative;
 `;
 
 const ItemDescription = styled.p`
-  font-size: 1.1rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.6;
   color: ${({ theme }) => theme.colors.secondary};
-  opacity: 0.8;
-  max-width: 600px;
-  margin-top: 1.5rem;
+  opacity: 0.7;
+  max-width: 720px;
+  margin: 0;
 `;
 
+const ProgressBar = styled(motion.div)`
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 1px;
+  background: ${({ theme }) => theme.colors.border};
+  border-radius: 1px;
+  overflow: hidden;
+  
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const ProgressFill = styled(motion.div)`
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: ${({ theme }) => theme.colors.secondary};
+  opacity: 0.6;
+  transform-origin: left;
+`;
 
 // --- ANIMATED APPROACH ITEM COMPONENT ---
 
 const MyApproachItem = ({ number, title, description, index }) => {
   const ref = useRef(null);
-  const isDescriptionInView = useInView(ref, { margin: "0px 0px -40% 0px" });
-  const isItemInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { 
+    margin: "0px 0px -50% 0px",
+    amount: 0.3 
+  });
+  const itemInView = useInView(ref, { 
+    once: true, 
+    margin: "-100px" 
+  });
 
   return (
     <ItemContainer 
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
-      animate={isItemInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.4, 0, 0.2, 1] }}
+      animate={itemInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.4, 0, 0.2, 1] }}
     >
       <ItemGrid>
         <ItemNumber>({number})</ItemNumber>
         <ItemContent>
           <ItemTitle>{title}</ItemTitle>
-          <AnimatePresence>
-            {isDescriptionInView && (
+          <AnimatePresence mode="wait">
+            {isInView && (
               <DescriptionWrapper
                 initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto', transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] } }}
-                exit={{ opacity: 0, height: 0, transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] } }}
+                animate={{ 
+                  opacity: 1, 
+                  height: 'auto', 
+                  transition: { 
+                    duration: 0.5, 
+                    ease: [0.4, 0, 0.2, 1],
+                    height: { duration: 0.3 },
+                    opacity: { duration: 0.4, delay: 0.1 }
+                  } 
+                }}
+                exit={{ 
+                  opacity: 0, 
+                  height: 0, 
+                  transition: { 
+                    duration: 0.3, 
+                    ease: [0.4, 0, 0.2, 1],
+                    height: { duration: 0.2 },
+                    opacity: { duration: 0.2 }
+                  } 
+                }}
               >
                 <ItemDescription>{description}</ItemDescription>
               </DescriptionWrapper>
@@ -330,10 +382,17 @@ const MyApproachItem = ({ number, title, description, index }) => {
           </AnimatePresence>
         </ItemContent>
       </ItemGrid>
+      
+      <ProgressBar>
+        <ProgressFill
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: isInView ? 1 : 0 }}
+          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+        />
+      </ProgressBar>
     </ItemContainer>
   );
 };
-
 
 // --- MAIN ABOUT PAGE COMPONENT ---
 
@@ -350,11 +409,11 @@ const AboutPage = () => {
   const smoothHeroProgress = useSpring(heroProgress, { stiffness: 100, damping: 30 });
   const textY = useTransform(smoothHeroProgress, [0, 1], ["0%", "-20%"]);
 
-  // Individual parallax transforms for each image - adjusted for stronger vertical differentiation
+  // Individual parallax transforms for each image
   const parallaxTransforms = [
-    useTransform(smoothHeroProgress, [0, 1], ["0%", "-25%"]), // Moves up
-    useTransform(smoothHeroProgress, [0, 1], ["0%", "-5%"]),  // Stays relatively central
-    useTransform(smoothHeroProgress, [0, 1], ["0%", "15%"])   // Moves down (positive value)
+    useTransform(smoothHeroProgress, [0, 1], ["0%", "-25%"]),
+    useTransform(smoothHeroProgress, [0, 1], ["0%", "-5%"]),
+    useTransform(smoothHeroProgress, [0, 1], ["0%", "15%"])
   ];
 
   useEffect(() => {
@@ -367,11 +426,10 @@ const AboutPage = () => {
     return 1;
   };
 
-  // Logic to bring hovered image to the front
   const getZIndex = (index, baseZ) => {
-    if (index === hoveredIndex) return 20; // Hovered is always on top
-    if (index === activeIndex) return 10; // Active is next
-    return baseZ; // Otherwise, use its base z-index
+    if (index === hoveredIndex) return 20;
+    if (index === activeIndex) return 10;
+    return baseZ;
   };
 
   return (
@@ -386,30 +444,47 @@ const AboutPage = () => {
             <Typewriter text="Driven by purpose." />
           </Title>
           
-          <IntroText
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
-          >
-            For me, creating isn’t just a job — it’s a way of being in the world.
-Every project I take on is a space of meaning: a chance to explore, to connect, to build something that resonates. I don’t just want to make things that work — I want to make things that matter.
-That move people. That carry intention, clarity, and care.
-
-I come from a hybrid path — psychology and media design — which means I look at systems both emotionally and structurally. I think about interfaces, spaces, and experiences as narratives in motion: alive, responsive, open to interaction.
-
-
-          </IntroText>
-          
-          <IntroText
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
-          >
-            From the first spark to the final layer of polish, I’m involved. I like to be inside the process — designing, developing, refining. Not just crafting how something functions, but how it feels, and why it’s there in the first place.
-
-Because in the end, I believe every detail is a chance to say something.
-To create meaning — and leave a trace.
-          </IntroText>
+          <TextGroup>
+            <IntroText
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            >
+              For me, creating isn't just a job — it's a way of being in the world. Every project I take on is a space of meaning: a chance to explore, to connect, to build something that resonates.
+            </IntroText>
+            
+            <IntroText
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
+            >
+              I don't just want to make things that work — I want to make things that matter. That move people. That carry intention, clarity, and care.
+            </IntroText>
+            
+            <IntroText
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6, ease: [0.4, 0, 0.2, 1] }}
+            >
+              I come from a hybrid path — psychology and media design — which means I look at systems both emotionally and structurally. I think about interfaces, spaces, and experiences as narratives in motion: alive, responsive, open to interaction.
+            </IntroText>
+            
+            <IntroText
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7, ease: [0.4, 0, 0.2, 1] }}
+            >
+              From the first spark to the final layer of polish, I'm involved. I like to be inside the process — designing, developing, refining. Not just crafting how something functions, but how it feels, and why it's there in the first place.
+            </IntroText>
+            
+            <IntroText
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8, ease: [0.4, 0, 0.2, 1] }}
+            >
+              Because in the end, I believe every detail is a chance to say something. To create meaning — and leave a trace.
+            </IntroText>
+          </TextGroup>
         </HeroContent>
 
         <ImageStackContainer>

@@ -5,6 +5,10 @@ const VideoSection = styled.section`
   position: relative;
   height: 400vh;
   background: ${({ theme }) => theme?.colors?.primary || '#000'};
+  
+  @media (max-width: 768px) {
+    height: 300vh; /* Reduce height on mobile for better performance */
+  }
 `;
 
 const StickyContainer = styled.div`
@@ -15,6 +19,11 @@ const StickyContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  @media (max-width: 768px) {
+    height: 100vh;
+    padding: 0 10px; /* Add padding for mobile */
+  }
 `;
 
 const VideoWrapper = styled.div`
@@ -45,6 +54,14 @@ const VideoWrapper = styled.div`
     transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
     box-shadow 0.6s ease;
   
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    width: 95vw;
+    border-radius: 12px;
+    --border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  }
+  
   /* Fullscreen state */
   &.fullscreen {
     --width: 100vw;
@@ -55,13 +72,19 @@ const VideoWrapper = styled.div`
     box-shadow: none;
   }
   
-  /* Smooth scale effects */
+  /* Smooth scale effects - reduced for mobile */
   &.expanding {
     --scale: 1.02;
+    @media (max-width: 768px) {
+      --scale: 1.01;
+    }
   }
   
   &.contracting {
     --scale: 0.99;
+    @media (max-width: 768px) {
+      --scale: 1;
+    }
   }
 `;
 
@@ -78,6 +101,11 @@ const StyledVideo = styled.video`
   object-fit: cover;
   /* Slight scale to prevent edge visibility */
   transform: scale(1.01);
+  
+  @media (max-width: 768px) {
+    object-fit: contain; /* Use contain on mobile to prevent cropping */
+    transform: scale(1); /* Remove scale on mobile */
+  }
 `;
 
 // Overlay for smooth fade effect during transitions
