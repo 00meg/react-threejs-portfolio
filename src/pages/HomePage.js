@@ -157,7 +157,6 @@ const ImageContainer = styled(motion.div)`
   
   &:hover {
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
-    transform: translateY(-8px) scale(1.02);
     
     &::after {
       opacity: 1;
@@ -324,8 +323,8 @@ const HomePage = () => {
   const imageVariants = {
     // Initial scale is large enough to cover the container during parallax
     initial: { scale: 1.3 },
-    // Hover scale is slightly larger for a zoom effect
-    hover: { scale: 1.35 }
+    // Hover scale is smaller for a zoom-out effect
+    hover: { scale: 1.1 }
   };
 
   return (

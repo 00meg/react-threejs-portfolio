@@ -282,6 +282,7 @@ export const projects = [
       }
     ]
   },
+
   {
     id: 'kollateral',
     title: 'KOLLATERAL',
@@ -383,6 +384,125 @@ export const projects = [
       }
     ]
   },
+  {
+    id: 'ko-nekt',
+    title: 'Ko-Nekt — Co-working for Creatives',
+    categories: [CATEGORY_TAGS.UI_UX, CATEGORY_TAGS.STRATEGY_CONCEPT],
+    year: '2025',
+    images: {
+    cover: '/projects/ko-nekt/cover.png',
+    },
+    content: [
+    {
+    type: 'overview',
+    text: 'Ko-Nekt is a conceptual UI/UX project for a mobile app designed to help freelance creatives and digital nomads discover, book, and manage co-working spaces. The platform focuses on a frictionless user flow and features tailored to the unique needs of a creative workflow, from finding inspiring environments to connecting with a community of peers.'
+    },
+    {
+    type: 'imageGrid',
+    columns: 4,
+    aspectRatio: 'auto',
+    images: [
+    '/projects/ko-nekt/intro01.png',
+    '/projects/ko-nekt/intro02.png',
+    '/projects/ko-nekt/intro03.png',
+    '/projects/ko-nekt/intro04.png',
+    ]
+    },
+    {
+    type: 'heading',
+    text: 'Onboarding'
+    },
+    {
+    type: 'details',
+    text: "The onboarding process is designed to be quick and personal. Users can set their professional role, creative interests, and preferred work amenities, allowing the app to tailor space recommendations from the very first use. Profile setup is streamlined with social media integration to foster community connections instantly."
+    },
+    {
+    type: 'imageGrid',
+    columns: 4,
+    aspectRatio: 'auto',
+    images: [
+    '/projects/ko-nekt/onboarding01.png',
+    '/projects/ko-nekt/onboarding02.png',
+    '/projects/ko-nekt/onboarding03.png',
+    '/projects/ko-nekt/onboarding04.png',
+    ]
+    },
+    {
+    type: 'imageGrid',
+    columns: 4,
+    aspectRatio: 'auto',
+    images: [
+    '/projects/ko-nekt/onboarding05.png',
+    '/projects/ko-nekt/onboarding06.png',
+    '/projects/ko-nekt/onboarding07.png',
+    '/projects/ko-nekt/onboarding08.png',
+    ]
+    },
+    {
+    type: 'heading',
+    text: 'Main Features'
+    },
+    {
+    type: 'details',
+    text: "The core experience revolves around effortless discovery. The homepage acts as a dynamic dashboard, surfacing relevant spaces, upcoming workshops, and exclusive member offers. Each space page includes an interactive community feed where users can post updates, read reviews, and get a feel for the daily vibe before booking."
+    },
+    {
+    type: 'imageGrid',
+    columns: 6,
+    aspectRatio: 'auto',
+    images: [
+    '/projects/ko-nekt/main01.png',
+    '/projects/ko-nekt/main02.png',
+    '/projects/ko-nekt/main03.png',
+    '/projects/ko-nekt/main04.png',
+    '/projects/ko-nekt/main05.png',
+    '/projects/ko-nekt/main06.png',
+    ]
+    },
+    {
+    type: 'heading',
+    text: 'Flexible Booking'
+    },
+    {
+    type: 'details',
+    text: "Clarity and control were the main principles for the booking flow. Ko-Nekt offers flexible time slots, from a single hour to a full day pass. The standout feature is the visual seat selector, which empowers users to choose their exact spot—whether it's a window seat for inspiration or a secluded corner for deep work."
+    },
+    {
+    type: 'imageGrid',
+    columns: 6,
+    aspectRatio: 'auto',
+    images: [
+    '/projects/ko-nekt/booking01.png',
+    '/projects/ko-nekt/booking02.png',
+    '/projects/ko-nekt/booking03.png',
+    '/projects/ko-nekt/booking04.png',
+    '/projects/ko-nekt/booking05.png',
+    '/projects/ko-nekt/booking06.png',
+    ]
+    },
+    {
+    type: 'heading',
+    text: 'Profile & Rewards'
+    },
+    {
+    type: 'details',
+    text: "The user profile serves as a professional hub, showcasing a creative's role, skills, and portfolio links. An integrated wallet system rewards community engagement; users can earn points by hosting workshops or being active, which can then be spent on future bookings, creating a self-sustaining ecosystem of contribution and reward."
+    },
+    {
+    type: 'imageGrid',
+    columns: 6,
+    aspectRatio: 'auto',
+    images: [
+    '/projects/ko-nekt/profile01.png',
+    '/projects/ko-nekt/profile02.png',
+    '/projects/ko-nekt/profile03.png',
+    '/projects/ko-nekt/profile04.png',
+    '/projects/ko-nekt/profile05.png',
+    '/projects/ko-nekt/profile06.png',
+    ]
+    }
+    ]
+    },
   {
     id: 'chupa-chups-sweet-escape',
     title: 'Chupa Chups – Sweet Escape',
