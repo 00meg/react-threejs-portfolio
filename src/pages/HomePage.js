@@ -336,7 +336,7 @@ const HomePage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <Typewriter text="Interactive Creative Systems" />
+          <Typewriter text="Art Direction & Interaction Design" />
         </Title>
         <IntroText 
           style={{ y: textY }}
@@ -344,8 +344,8 @@ const HomePage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         >
-          I design and develop digital experiences — from websites and interfaces to immersive installations and audiovisual tools.
-          I work across UI/UX, Creative Technology, and Motion / AV to turn complex ideas into clear, engaging systems.
+          Art Director specializing in cross-platform communication. From concept to execution, I create visual narratives and communication systems that work across digital and physical touchpoints. My practice combines strategic direction with hands-on development to transform complex ideas into clear, engaging experiences.
+
         </IntroText>
       </HeroSection>
 

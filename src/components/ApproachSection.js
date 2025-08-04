@@ -6,33 +6,33 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 const approachData = [
   {
     number: '01',
-    title: 'Creative Process',
-    description: 'I design systems that support ideation, prototyping, and creative workflows — from real-time visual tools to modular setups that extend and streamline the design process itself.'
+    title: 'Creative Direction & Strategy',
+    description: 'I develop visual concepts and creative strategies that guide projects from initial brief to final execution — defining creative visions, directing teams, and ensuring conceptual coherence across all touchpoints.'
   },
   {
     number: '02',
-    title: 'Web & Interactive Experiences',
-    description: 'I develop interfaces and digital ecosystems that connect content, interaction, and identity — from experimental platforms to responsive, content-driven websites.'
+    title: 'Cross-Platform Communication',
+    description: 'I create communication systems that work seamlessly across digital and physical media — from brand campaigns to interactive experiences that engage audiences and convey complex narratives with clarity.'
   },
   {
     number: '03',
-    title: 'Spatial & Immersive Design',
-    description: 'I create experiences that inhabit physical space — combining sound, motion, light, and interaction in installations, performances, and hybrid formats.'
+    title: 'Digital Experience Direction',
+    description: 'I art direct and develop digital ecosystems — websites, platforms, and interactive experiences that balance user needs, brand identity, and technical innovation to create meaningful connections.'
   },
   {
     number: '04',
-    title: 'Audiovisual & Motion Design',
-    description: 'I craft visual narratives that move — through animation, motion graphics, and dynamic media for screens, projections, and digital communication.'
+    title: 'Motion & Audiovisual Direction',
+    description: 'I conceive and direct moving image content — from motion graphics to immersive audiovisual experiences, crafting visual narratives that communicate through time, rhythm, and emotion.'
   },
   {
     number: '05',
-    title: 'Experience & System Design',
-    description: 'I approach every project as an interconnected system — thinking across formats and designing for coherence, adaptability, and continuity over time.'
+    title: 'Spatial & Installation Concepts',
+    description: 'I design experiences that transform physical spaces — directing installations, exhibitions, and immersive environments that combine technology, storytelling, and human interaction.'
   },
   {
     number: '06',
-    title: 'Research & Narrative Strategy',
-    description: 'I combine design with research, archival practices, and storytelling — building formats that give shape to memory, emotion, and cultural meaning.'
+    title: 'Content Strategy & Narrative Design',
+    description: 'I shape how stories are told across media — developing content strategies, narrative frameworks, and editorial approaches that give structure and meaning to complex communications.'
   }
 ];
 
